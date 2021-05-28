@@ -18,6 +18,14 @@ class m210527_102002_create_substance_table extends Migration
             'description' => $this->text()->notNull()->comment('Описание'),
         ]);
 
+        $this->batchInsert('{{%diagnosis}}', ['name'], [
+            ['Ибупрофен'],
+            ['Флурбипрофен'],
+            ['Натрия алгинат'],
+            ['Хлоропирамин'],
+            ['Аллантоин'],
+        ]);
+
         $this->createTable('{{%diagnosis_substance}}', [
             'id' => $this->primaryKey(),
             'substance_id' => $this->integer()->notNull()->comment('Активное вещество'),
