@@ -31,6 +31,25 @@ class m210527_102036_create_item_table extends Migration
         $this->createIndex("idx_{$tableName}_group_id", $tableName, 'group_id');
         $this->addForeignKey("fk_{$tableName}_substance_id", $tableName, 'substance_id', 'substance', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_substance_id", $tableName, 'substance_id');
+
+
+        $this->createTable('{{%user_store}}', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull()->comment('Пользователь'),
+            'item_id' => $this->integer()->notNull()->comment('Лекарство'),
+            'amount' => $this->integer()->notNull()->defaultValue(1)->comment('Количество'),
+            'target_id' => $this->integer()->notNull()->comment('Кто будет принимать'),
+            'regular' => $this->boolean()->notNull()->defaultValue(false)->comment('Регулярный прием'),
+            'mode' => $this->smallInteger()->notNull()->defaultValue(1)->comment('Вид аптечки'), //дома или в дороге
+        ]);
+
+        $tableName = "user_store";
+        $this->addForeignKey("fk_{$tableName}_user_id", $tableName, 'user_id', 'user', 'id', 'CASCADE', 'CASCADE');
+        $this->createIndex("idx_{$tableName}_user_id", $tableName, 'user_id');
+        $this->addForeignKey("fk_{$tableName}_target_id", $tableName, 'target_id', 'user', 'id', 'CASCADE', 'CASCADE');
+        $this->createIndex("idx_{$tableName}_target_id", $tableName, 'target_id');
+        $this->addForeignKey("fk_{$tableName}_item_id", $tableName, 'item_id', 'item', 'id', 'CASCADE', 'CASCADE');
+        $this->createIndex("idx_{$tableName}_item_id", $tableName, 'item_id');
     }
 
     /**
@@ -39,5 +58,6 @@ class m210527_102036_create_item_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%item}}');
+        $this->dropTable('{{%user_store}}');
     }
 }
