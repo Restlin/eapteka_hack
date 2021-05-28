@@ -18,6 +18,12 @@ class m210527_102036_create_item_table extends Migration
             'group_id' => $this->integer()->notNull()->comment('Группа'),
             'substance_id' => $this->integer()->notNull()->comment('Активное вещество'),
             'dose' => $this->float()->notNull()->comment('Доза'),
+            'food_mode' => $this->smallInteger()->defaultValue(1)->comment('Прием с пищей'),
+            'per_day' => $this->smallInteger()->defaultValue(1)->comment('Периодичность'),
+            'temp_min' => $this->smallInteger()->defaultValue(0)->comment('Минимальная температура'),
+            'temp_max' => $this->smallInteger()->defaultValue(25)->comment('Максимальная температура'),
+            'content' => $this->text()->comment('Описание'),
+            'price' => $this->decimal(10,2)->comment('Стоимость'),
         ]);
 
         $tableName = "item";
