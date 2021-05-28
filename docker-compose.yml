@@ -39,14 +39,6 @@ services:
       - postgres-test:/var/lib/postgresql/data
     ports:
       - 54322:5432
-  memcached:
-    container_name: memcached
-    image: memcached:latest
-    ports:
-      - 11211:11211
-    volumes:
-      - ./:/app
-    restart: always
   nginx:
     container_name: nginx
     image: nginx:latest
