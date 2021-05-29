@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\UserStore */
 /* @var $items array */
 /* @var $users array */
+/* @var $modes array */
 
 $this->title = 'Изменить: ' . $model->item->name;
 $this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Изменить';
         'model' => $model,
         'items' => $items,
         'users' => $users,
+        'modes' => $modes,
     ]) ?>
 
 </div>

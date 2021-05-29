@@ -74,6 +74,7 @@ class UserStoreController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                //return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -84,6 +85,7 @@ class UserStoreController extends Controller
             'model' => $model,
             'items' => Item::getList(),
             'users' => User::getList(),
+            'modes' => UserStore::getStoreModeList(),
         ]);
     }
 
@@ -106,6 +108,7 @@ class UserStoreController extends Controller
             'model' => $model,
             'items' => Item::getList(),
             'users' => User::getList(),
+            'modes' => UserStore::getStoreModeList(),
         ]);
     }
 

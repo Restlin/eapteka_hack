@@ -90,4 +90,11 @@ class UserStore extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public static function getStoreModeList(): array {
+        return [
+            1 => 'В дорогу',
+            2 => 'Домой',
+        ];
+    }
 }

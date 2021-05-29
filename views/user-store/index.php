@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UserStore;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -24,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
+        'itemView' => function (UserStore $model, $key, $index, $widget) {
+            return Html::a(Html::encode($model->item->name), ['view', 'id' => $model->id]);
         },
     ]); ?>
 

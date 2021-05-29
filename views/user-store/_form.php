@@ -8,6 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $items array */
 /* @var $users array */
+/* @var $modes array */
 
 ?>
 
@@ -25,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'regular')->checkbox() ?>
 
-    <?= $form->field($model, 'mode')->textInput() ?>
+    <?= $form->field($model, 'mode')->dropDownList($modes) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
