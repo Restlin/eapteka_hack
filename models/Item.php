@@ -61,7 +61,7 @@ class Item extends \yii\db\ActiveRecord
             'name' => 'Наменование',
             'group_id' => 'Группа',
             'substance_id' => 'Активное вещество',
-            'dose' => 'Доза',
+            'dose' => 'Доза, мг',
             'food_mode' => 'Прием с пищей',
             'per_day' => 'Периодичность',
             'temp_min' => 'Мин. температура, C',
