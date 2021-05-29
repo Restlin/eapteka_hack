@@ -1,7 +1,7 @@
 <?php
 
-use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -20,24 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'user_id',
-            'item_id',
-            'amount',
-            'target_id',
-            //'regular:boolean',
-            //'mode',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => function ($model, $key, $index, $widget) {
+            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
+        },
     ]); ?>
 
     <?php Pjax::end(); ?>
