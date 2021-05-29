@@ -7,26 +7,19 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\PrescriptionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Prescriptions';
+$this->title = 'Рецепты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="prescription-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Prescription', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-        },
+        'itemView' => 'view',
     ]) ?>
 
     <?php Pjax::end(); ?>

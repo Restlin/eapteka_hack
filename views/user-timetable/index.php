@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserTimetableSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $types array */
 
 $this->title = 'Расписание';
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,9 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return $model->date.' '.$model->content.' '.Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-        },
+        'itemView' => 'view',
+        'viewParams' => ['types' => $types],
     ]) ?>
 
     <?php Pjax::end(); ?>

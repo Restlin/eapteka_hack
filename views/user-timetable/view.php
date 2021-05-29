@@ -5,36 +5,32 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\UserTimetable */
+/* @var types array */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'User Timetables', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="user-timetable-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($model->date) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'value' => $model->user->fio,
+            ],
             'date',
             'content:ntext',
-            'item_id',
-            'type',
+            [
+                'attribute' => 'item_id',
+                'value' => $model->item->name,
+            ],
+            [
+                'attribute' => 'type',
+                'value' => $types[$model->type]
+            ],
             'complete:boolean',
         ],
     ]) ?>

@@ -43,6 +43,7 @@ class UserTimetableController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'types' => UserTimetable::getTypeList()
         ]);
     }
 
