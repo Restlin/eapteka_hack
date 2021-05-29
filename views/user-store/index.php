@@ -8,6 +8,8 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserStoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $items array */
+/* @var $users array */
 
 $this->title = 'Моя аптечка';
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'items' => $items, 'users' => $users]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,

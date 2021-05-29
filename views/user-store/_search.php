@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\UserStoreSearch */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $items array */
+/* @var $users array */
 ?>
 
 <div class="user-store-search">
@@ -18,23 +20,21 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'user_id')->dropDownList($users) ?>
 
-    <?= $form->field($model, 'user_id') ?>
-
-    <?= $form->field($model, 'item_id') ?>
+    <?= $form->field($model, 'item_id')->dropDownList($items) ?>
 
     <?= $form->field($model, 'amount') ?>
 
-    <?= $form->field($model, 'target_id') ?>
+    <?= $form->field($model, 'target_id')->dropDownList($users) ?>
 
     <?php // echo $form->field($model, 'regular')->checkbox() ?>
 
     <?php // echo $form->field($model, 'mode') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Сброс', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

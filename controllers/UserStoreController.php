@@ -47,6 +47,8 @@ class UserStoreController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'items' => Item::getList(),
+            'users' => User::getList(),
         ]);
     }
 
