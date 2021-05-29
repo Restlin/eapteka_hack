@@ -43,7 +43,6 @@ HTML,
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Расписание', 'url' => ['/user-timetable']],
             ['label' => 'Моя аптечка', 'url' => ['/user-store']],
             ['label' => 'Рецепты', 'url' => ['/prescription']],
