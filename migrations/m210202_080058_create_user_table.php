@@ -22,6 +22,13 @@ class m210202_080058_create_user_table extends Migration
             'role' => $this->integer()->notNull()->defaultValue(self::ROLE_USER)->comment('Роль'),
         ]);
 
+        $this->insert('{{%user}}', [
+            'fio' => 'Тестовый пользователь',
+            'email' => 'test@test.ru',
+            'password_hash' => '123456',
+            'role' => self::ROLE_USER
+        ]);
+
         $this->createTable('{{%user_family}}', [
             'id' => $this->primaryKey(),
             'user_id1' => $this->integer()->notNull()->comment('Пользователь'),
