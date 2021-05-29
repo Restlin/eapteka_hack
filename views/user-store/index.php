@@ -27,9 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
+        'itemOptions' => ['class' => 'col-sm-6 col-md-4'],
         'itemView' => function (UserStore $model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->item->name), ['view', 'id' => $model->id]);
+        $name = Html::a(Html::encode($model->item->name), ['view', 'id' => $model->id]);
+        return <<<HTML
+        <div class="thumbnail card">
+              <img src="images/noImage.jpg" alt="..." />
+              <div class="card-caption">
+                <h3>{$name}</h3>
+                <p class="cardContent cardContent-2">
+                  {$model->item->content}
+                </p>
+                <p class="card-additional">
+                  <a href="#" class="btn btn-primary" role="button">Действие №1</a>
+                  <a href="#" class="btn btn-default" role="button">Действие №2</a>
+                </p>
+              </div>
+        </div>
+HTML;
         },
     ]); ?>
 

@@ -10,7 +10,7 @@ use yii\helpers\Html;
 
 $this->title = 'Изменить: ' . $model->item->name;
 $this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->item->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="user-store-update">
