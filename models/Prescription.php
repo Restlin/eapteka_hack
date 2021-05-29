@@ -14,8 +14,9 @@ use Yii;
  * @property string $date Дата рецепта
  *
  * @property User $author
- * @property User $diagnosis
+ * @property Diagnosis $diagnosis
  * @property User $patient
+ * @property PrescriptionItem[] $items
  */
 class Prescription extends \yii\db\ActiveRecord
 {
@@ -39,7 +40,7 @@ class Prescription extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
             [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['patient_id' => 'id']],
-            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => Diagnosis::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -50,7 +51,7 @@ class Prescription extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'author_id' => 'Автор',
+            'author_id' => 'Врач',
             'patient_id' => 'Пациент',
             'diagnosis_id' => 'Диагноз',
             'date' => 'Дата рецепта',
@@ -74,7 +75,7 @@ class Prescription extends \yii\db\ActiveRecord
      */
     public function getDiagnosis()
     {
-        return $this->hasOne(User::class, ['id' => 'diagnosis_id']);
+        return $this->hasOne(Diagnosis::class, ['id' => 'diagnosis_id']);
     }
 
     /**
@@ -85,5 +86,14 @@ class Prescription extends \yii\db\ActiveRecord
     public function getPatient()
     {
         return $this->hasOne(User::class, ['id' => 'patient_id']);
+    }
+    /**
+     * Gets query for [[PrescriptionItems]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(PrescriptionItem::class, ['prescription_id' => 'id']);
     }
 }

@@ -150,12 +150,16 @@ class Item extends \yii\db\ActiveRecord
     public function getModeContent(): string {
         $foodModes = self::getFoodModeList();
         $perDayModes = self::getPerDayModeList();
-        return $perDayModes[$this->per_day].' '.mb_strtolower($foodModes[$this->food_mode], 'UTF-8');
+        return mb_strtolower($foodModes[$this->food_mode], 'UTF-8');
     }
 
-    public static function getList(): array {
+    public static function getList($substance_id = null): array {
         $list = [];
-        $models = self::find()->orderBy('name')->all();
+        $query = self::find()->orderBy('name');
+        if($substance_id) {
+            $query->andWhere(['substance_id' => $substance_id]);
+        }
+        $models = $query->all();
         foreach($models as $model) {
             $list[$model->id] = $model->name;
         }

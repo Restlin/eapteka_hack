@@ -102,15 +102,16 @@ class UserStore extends \yii\db\ActiveRecord
         $now = new \DateTime();
         $times = $this->item->getTimes();
         $content = $this->item->getModeContent();
-        $date = $now->format('d.m.Y');
         for($day = 0; $day< 3; $day++) { //@todo заменить на курс приема из справочника. Константа для прототипа
+            $date = $now->format('d.m.Y');
             foreach($times as $time) {
                 $this->createTimetable($date.' '.$time, $content);
             }
+            $now->modify(" +1 days");
         }
         parent::afterSave($insert, $changedAttributes);
     }
-    
+
     private function createTimetable($date, $content) {
         $timetable = new UserTimetable();
         $timetable->user_id = $this->target_id;

@@ -13,26 +13,33 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="prescription-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+    <?php
+        $substances = [];
+        foreach($model->items as $item) {
+            $link = Html::a('Купить', ['user-store/create', 'substance_id' => $item->substance_id]);
+            $substances[] = $item->substance->name.' '.$item->dose.'мг '.$link;
+        }
+    ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'author_id',
-            'patient_id',
-            'diagnosis_id',
+            [
+                'attribute' => 'author_id',
+                'value' => $model->author->fio,
+            ],
+            [
+                'attribute' => 'patient_id',
+                'value' => $model->patient->fio,
+            ],
+            [
+                'attribute' => 'diagnosis_id',
+                'value' => $model->diagnosis->name,
+            ],
+            [
+                'label' => 'Выписанные действующие вещества',
+                'value' => implode('<br>', $substances),
+                'format' => 'raw',
+            ],
             'date',
         ],
     ]) ?>

@@ -23,8 +23,20 @@ class m210202_080058_create_user_table extends Migration
         ]);
 
         $this->insert('{{%user}}', [
-            'fio' => 'Тестовый пользователь',
+            'fio' => 'Куки Никулина',
             'email' => 'test@test.ru',
+            'password_hash' => '123456',
+            'role' => self::ROLE_USER
+        ]);
+        $this->insert('{{%user}}', [
+            'fio' => 'Ума Никулина',
+            'email' => 'test2@test.ru',
+            'password_hash' => '123456',
+            'role' => self::ROLE_USER
+        ]);
+        $this->insert('{{%user}}', [
+            'fio' => 'Фасоль Гиппокарат',
+            'email' => 'test3@test.ru',
             'password_hash' => '123456',
             'role' => self::ROLE_USER
         ]);

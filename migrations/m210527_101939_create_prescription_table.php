@@ -55,6 +55,7 @@ class m210527_101939_create_prescription_table extends Migration
             ['Стоматит'],
             ['Раны'],
             ['Цистит'],
+            ['Ребенок'],
         ]);
 
 
@@ -64,6 +65,13 @@ class m210527_101939_create_prescription_table extends Migration
             'patient_id' => $this->integer()->notNull()->comment('Пациент'),
             'diagnosis_id' => $this->integer()->notNull()->comment('Диагноз'),
             'date' => $this->date()->notNull()->comment('Дата рецепта'),
+        ]);
+
+        $this->insert('{{%prescription}}', [ //тестовый рецепт на Уму
+            'author_id' => 3,
+            'patient_id' => 2,
+            'diagnosis_id' => 38,
+            'date' => date('d.m.Y H:i:s')
         ]);
 
         $tableName = "prescription";

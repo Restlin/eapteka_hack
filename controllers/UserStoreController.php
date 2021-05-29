@@ -73,7 +73,7 @@ class UserStoreController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($substance_id = null)
     {
         $model = new UserStore();
         $model->user_id = \Yii::$app->user->id;
@@ -88,7 +88,7 @@ class UserStoreController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'items' => Item::getList(),
+            'items' => Item::getList($substance_id),
             'users' => User::getList(),
             'modes' => UserStore::getStoreModeList(),
         ]);
