@@ -15,10 +15,9 @@ class m210527_102002_create_substance_table extends Migration
         $this->createTable('{{%substance}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100)->notNull()->comment('Наименование'),
-            'description' => $this->text()->notNull()->comment('Описание'),
         ]);
 
-        $this->batchInsert('{{%diagnosis}}', ['name'], [
+        $this->batchInsert('{{%substance}}', ['name'], [
             ['Ибупрофен'],
             ['Флурбипрофен'],
             ['Натрия алгинат'],

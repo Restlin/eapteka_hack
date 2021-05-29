@@ -34,8 +34,8 @@ class UserFamily extends \yii\db\ActiveRecord
             [['user_id1', 'user_id2'], 'required'],
             [['user_id1', 'user_id2', 'role'], 'default', 'value' => null],
             [['user_id1', 'user_id2', 'role'], 'integer'],
-            [['user_id1'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id1' => 'id']],
-            [['user_id2'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id2' => 'id']],
+            [['user_id1'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id1' => 'id']],
+            [['user_id2'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id2' => 'id']],
         ];
     }
 
@@ -59,7 +59,7 @@ class UserFamily extends \yii\db\ActiveRecord
      */
     public function getUserId1()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id1']);
+        return $this->hasOne(User::class, ['id' => 'user_id1']);
     }
 
     /**
@@ -69,6 +69,6 @@ class UserFamily extends \yii\db\ActiveRecord
      */
     public function getUserId2()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id2']);
+        return $this->hasOne(User::class, ['id' => 'user_id2']);
     }
 }

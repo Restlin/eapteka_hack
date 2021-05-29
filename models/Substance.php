@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $name Наименование
- * @property string $description Описание
  *
  * @property DiagnosisSubstance[] $diagnosisSubstances
  * @property Item[] $items
@@ -33,8 +32,7 @@ class Substance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
-            [['description'], 'string'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 100],
         ];
     }
@@ -47,7 +45,6 @@ class Substance extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Наименование',
-            'description' => 'Описание',
         ];
     }
 
@@ -58,7 +55,7 @@ class Substance extends \yii\db\ActiveRecord
      */
     public function getDiagnosisSubstances()
     {
-        return $this->hasMany(DiagnosisSubstance::className(), ['substance_id' => 'id']);
+        return $this->hasMany(DiagnosisSubstance::class, ['substance_id' => 'id']);
     }
 
     /**
@@ -68,7 +65,7 @@ class Substance extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['substance_id' => 'id']);
+        return $this->hasMany(Item::class, ['substance_id' => 'id']);
     }
 
     /**
@@ -78,7 +75,7 @@ class Substance extends \yii\db\ActiveRecord
      */
     public function getPrescriptionItems()
     {
-        return $this->hasMany(PrescriptionItem::className(), ['substance_id' => 'id']);
+        return $this->hasMany(PrescriptionItem::class, ['substance_id' => 'id']);
     }
 
     /**
@@ -88,7 +85,7 @@ class Substance extends \yii\db\ActiveRecord
      */
     public function getSubstanceEffects()
     {
-        return $this->hasMany(SubstanceEffect::className(), ['substance_id1' => 'id']);
+        return $this->hasMany(SubstanceEffect::class, ['substance_id1' => 'id']);
     }
 
     /**
@@ -98,6 +95,15 @@ class Substance extends \yii\db\ActiveRecord
      */
     public function getSubstanceEffects0()
     {
-        return $this->hasMany(SubstanceEffect::className(), ['substance_id2' => 'id']);
+        return $this->hasMany(SubstanceEffect::class, ['substance_id2' => 'id']);
+    }
+
+    public static function getList(): array {
+        $list = [];
+        $models = self::find()->orderBy('name')->all();
+        foreach($models as $model) {
+            $list[$model->id] = $model->name;
+        }
+        return $list;
     }
 }

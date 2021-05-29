@@ -41,4 +41,13 @@ class Diagnosis extends \yii\db\ActiveRecord
             'name' => 'Наименование',
         ];
     }
+    
+    public static function getList(): array {
+        $list = [];
+        $models = self::find()->orderBy('name')->all();
+        foreach($models as $model) {
+            $list[$model->id] = $model->name;
+        }
+        return $list;
+    }
 }

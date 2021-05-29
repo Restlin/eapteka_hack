@@ -39,9 +39,9 @@ class UserStore extends \yii\db\ActiveRecord
             [['user_id', 'item_id', 'amount', 'target_id', 'mode'], 'default', 'value' => null],
             [['user_id', 'item_id', 'amount', 'target_id', 'mode'], 'integer'],
             [['regular'], 'boolean'],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-            [['target_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['target_id' => 'id']],
+            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['target_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['target_id' => 'id']],
         ];
     }
 
@@ -68,7 +68,7 @@ class UserStore extends \yii\db\ActiveRecord
      */
     public function getItem()
     {
-        return $this->hasOne(Item::className(), ['id' => 'item_id']);
+        return $this->hasOne(Item::class, ['id' => 'item_id']);
     }
 
     /**
@@ -78,7 +78,7 @@ class UserStore extends \yii\db\ActiveRecord
      */
     public function getTarget()
     {
-        return $this->hasOne(User::className(), ['id' => 'target_id']);
+        return $this->hasOne(User::class, ['id' => 'target_id']);
     }
 
     /**
@@ -88,6 +88,6 @@ class UserStore extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

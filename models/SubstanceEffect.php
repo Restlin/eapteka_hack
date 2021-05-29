@@ -37,8 +37,8 @@ class SubstanceEffect extends \yii\db\ActiveRecord
             [['substance_id1', 'substance_id2'], 'integer'],
             [['positive'], 'boolean'],
             [['content'], 'string'],
-            [['substance_id1'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id1' => 'id']],
-            [['substance_id2'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id2' => 'id']],
+            [['substance_id1'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id1' => 'id']],
+            [['substance_id2'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id2' => 'id']],
         ];
     }
 
@@ -63,7 +63,7 @@ class SubstanceEffect extends \yii\db\ActiveRecord
      */
     public function getSubstanceId1()
     {
-        return $this->hasOne(Substance::className(), ['id' => 'substance_id1']);
+        return $this->hasOne(Substance::class, ['id' => 'substance_id1']);
     }
 
     /**
@@ -73,6 +73,6 @@ class SubstanceEffect extends \yii\db\ActiveRecord
      */
     public function getSubstanceId2()
     {
-        return $this->hasOne(Substance::className(), ['id' => 'substance_id2']);
+        return $this->hasOne(Substance::class, ['id' => 'substance_id2']);
     }
 }

@@ -51,6 +51,15 @@ class Group extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['group_id' => 'id']);
+        return $this->hasMany(Item::class, ['group_id' => 'id']);
+    }
+
+    public static function getList(): array {
+        $list = [];
+        $models = self::find()->orderBy('name')->all();
+        foreach($models as $model) {
+            $list[$model->id] = $model->name;
+        }
+        return $list;
     }
 }

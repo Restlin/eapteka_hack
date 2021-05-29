@@ -46,8 +46,8 @@ class Item extends \yii\db\ActiveRecord
             [['dose', 'price'], 'number'],
             [['content'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::className(), 'targetAttribute' => ['group_id' => 'id']],
-            [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id' => 'id']],
+            [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::class, 'targetAttribute' => ['group_id' => 'id']],
+            [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id' => 'id']],
         ];
     }
 
@@ -64,10 +64,10 @@ class Item extends \yii\db\ActiveRecord
             'dose' => 'Доза',
             'food_mode' => 'Прием с пищей',
             'per_day' => 'Периодичность',
-            'temp_min' => 'Минимальная температура',
-            'temp_max' => 'Максимальная температура',
+            'temp_min' => 'Мин. температура, C',
+            'temp_max' => 'Макс. температура, С',
             'content' => 'Описание',
-            'price' => 'Стоимость',
+            'price' => 'Стоимость, рубли',
         ];
     }
 
@@ -78,7 +78,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getGroup()
     {
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+        return $this->hasOne(Group::class, ['id' => 'group_id']);
     }
 
     /**
@@ -88,7 +88,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getSubstance()
     {
-        return $this->hasOne(Substance::className(), ['id' => 'substance_id']);
+        return $this->hasOne(Substance::class, ['id' => 'substance_id']);
     }
 
     /**
@@ -98,7 +98,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getUserStores()
     {
-        return $this->hasMany(UserStore::className(), ['item_id' => 'id']);
+        return $this->hasMany(UserStore::class, ['item_id' => 'id']);
     }
 
     /**
@@ -108,6 +108,22 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getUserTimetables()
     {
-        return $this->hasMany(UserTimetable::className(), ['item_id' => 'id']);
+        return $this->hasMany(UserTimetable::class, ['item_id' => 'id']);
+    }
+
+    public static function getFoodModeList(): array {
+        return [
+            1 => 'Перед едой',
+            2 => 'Во время еды',
+            3 => 'После еды',
+        ];
+    }
+
+    public static function getPerDayModeList(): array {
+        return [
+            1 => 'Один раз в день',
+            2 => 'Два раза в день',
+            3 => 'Три раза в день'
+        ];
     }
 }

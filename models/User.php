@@ -72,7 +72,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getDiagnosisSubstances()
     {
-        return $this->hasMany(DiagnosisSubstance::className(), ['diagnosis_id' => 'id']);
+        return $this->hasMany(DiagnosisSubstance::class, ['diagnosis_id' => 'id']);
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getPrescriptions()
     {
-        return $this->hasMany(Prescription::className(), ['author_id' => 'id']);
+        return $this->hasMany(Prescription::class, ['author_id' => 'id']);
     }
 
     /**
@@ -92,7 +92,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getPrescriptions0()
     {
-        return $this->hasMany(Prescription::className(), ['patient_id' => 'id']);
+        return $this->hasMany(Prescription::class, ['patient_id' => 'id']);
     }
 
     /**
@@ -102,7 +102,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getPrescriptions1()
     {
-        return $this->hasMany(Prescription::className(), ['diagnosis_id' => 'id']);
+        return $this->hasMany(Prescription::class, ['diagnosis_id' => 'id']);
     }
 
     /**
@@ -112,7 +112,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserDiagnoses()
     {
-        return $this->hasMany(UserDiagnosis::className(), ['user_id' => 'id']);
+        return $this->hasMany(UserDiagnosis::class, ['user_id' => 'id']);
     }
 
     /**
@@ -122,7 +122,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserDiagnoses0()
     {
-        return $this->hasMany(UserDiagnosis::className(), ['diagnosis_id' => 'id']);
+        return $this->hasMany(UserDiagnosis::class, ['diagnosis_id' => 'id']);
     }
 
     /**
@@ -132,7 +132,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserFamilies()
     {
-        return $this->hasMany(UserFamily::className(), ['user_id1' => 'id']);
+        return $this->hasMany(UserFamily::class, ['user_id1' => 'id']);
     }
 
     /**
@@ -142,7 +142,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserFamilies0()
     {
-        return $this->hasMany(UserFamily::className(), ['user_id2' => 'id']);
+        return $this->hasMany(UserFamily::class, ['user_id2' => 'id']);
     }
 
     /**
@@ -152,7 +152,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserStores()
     {
-        return $this->hasMany(UserStore::className(), ['user_id' => 'id']);
+        return $this->hasMany(UserStore::class, ['user_id' => 'id']);
     }
 
     /**
@@ -162,7 +162,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserStores0()
     {
-        return $this->hasMany(UserStore::className(), ['target_id' => 'id']);
+        return $this->hasMany(UserStore::class, ['target_id' => 'id']);
     }
 
     /**
@@ -172,6 +172,6 @@ class User extends \yii\db\ActiveRecord
      */
     public function getUserTimetables()
     {
-        return $this->hasMany(UserTimetable::className(), ['user_id' => 'id']);
+        return $this->hasMany(UserTimetable::class, ['user_id' => 'id']);
     }
 }

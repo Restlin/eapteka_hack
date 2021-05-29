@@ -33,7 +33,7 @@ class PrescriptionItem extends \yii\db\ActiveRecord
             [['substance_id'], 'default', 'value' => null],
             [['substance_id'], 'integer'],
             [['dose'], 'number'],
-            [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id' => 'id']],
+            [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id' => 'id']],
         ];
     }
 
@@ -56,6 +56,6 @@ class PrescriptionItem extends \yii\db\ActiveRecord
      */
     public function getSubstance()
     {
-        return $this->hasOne(Substance::className(), ['id' => 'substance_id']);
+        return $this->hasOne(Substance::class, ['id' => 'substance_id']);
     }
 }

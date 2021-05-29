@@ -37,9 +37,9 @@ class Prescription extends \yii\db\ActiveRecord
             [['author_id', 'patient_id', 'diagnosis_id'], 'default', 'value' => null],
             [['author_id', 'patient_id', 'diagnosis_id'], 'integer'],
             [['date'], 'safe'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
-            [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['patient_id' => 'id']],
-            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['diagnosis_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
+            [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['patient_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -64,7 +64,7 @@ class Prescription extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(User::className(), ['id' => 'author_id']);
+        return $this->hasOne(User::class, ['id' => 'author_id']);
     }
 
     /**
@@ -74,7 +74,7 @@ class Prescription extends \yii\db\ActiveRecord
      */
     public function getDiagnosis()
     {
-        return $this->hasOne(User::className(), ['id' => 'diagnosis_id']);
+        return $this->hasOne(User::class, ['id' => 'diagnosis_id']);
     }
 
     /**
@@ -84,6 +84,6 @@ class Prescription extends \yii\db\ActiveRecord
      */
     public function getPatient()
     {
-        return $this->hasOne(User::className(), ['id' => 'patient_id']);
+        return $this->hasOne(User::class, ['id' => 'patient_id']);
     }
 }
