@@ -18,6 +18,7 @@ use Yii;
  * @property int|null $temp_max Максимальная температура
  * @property string|null $content Описание
  * @property float|null $price Стоимость
+ * @property integer $amount количество в упаковке
  *
  * @property Group $group
  * @property Substance $substance
@@ -44,6 +45,7 @@ class Item extends \yii\db\ActiveRecord
             [['group_id', 'substance_id', 'food_mode', 'per_day', 'temp_min', 'temp_max'], 'default', 'value' => null],
             [['group_id', 'substance_id', 'food_mode', 'per_day', 'temp_min', 'temp_max'], 'integer'],
             [['dose', 'price'], 'number'],
+            [['amount'], 'integer'],
             [['content'], 'string'],
             [['name'], 'string', 'max' => 100],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::class, 'targetAttribute' => ['group_id' => 'id']],
@@ -68,6 +70,7 @@ class Item extends \yii\db\ActiveRecord
             'temp_max' => 'Макс. температура, С',
             'content' => 'Описание',
             'price' => 'Стоимость, рубли',
+            'amount' => 'Количество в упаковке, штуки',
         ];
     }
 

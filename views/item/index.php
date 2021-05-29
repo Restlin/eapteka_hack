@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'dose',
+            'amount',
             //'food_mode',
             //'per_day',
             'temp_min',

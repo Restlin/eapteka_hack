@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'temp_max',
             'content:ntext',
             'price',
+            'amount'
         ],
     ]) ?>
 
