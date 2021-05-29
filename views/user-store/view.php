@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\UserStore */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Мои лекарства', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
-            'item_id',
+            'user.fio',
+            'item.name',
             'amount',
-            'target_id',
+            'target.fio',
             'regular:boolean',
             'mode',
         ],

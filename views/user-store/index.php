@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UserStore;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
@@ -7,8 +8,10 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserStoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $items array */
+/* @var $users array */
 
-$this->title = 'Мои лекарства';
+$this->title = 'Моя аптечка';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-store-index">
@@ -20,12 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'items' => $items, 'users' => $users]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
+        'itemView' => function (UserStore $model, $key, $index, $widget) {
+            return Html::a(Html::encode($model->item->name), ['view', 'id' => $model->id]);
         },
     ]); ?>
 

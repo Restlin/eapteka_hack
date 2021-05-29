@@ -5,9 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\UserStore */
 /* @var $items array */
+/* @var $users array */
+/* @var $modes array */
 
 $this->title = 'Изменить: ' . $model->item->name;
-$this->params['breadcrumbs'][] = ['label' => 'Мои лекарства', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Изменить';
 ?>
@@ -18,6 +20,8 @@ $this->params['breadcrumbs'][] = 'Изменить';
     <?= $this->render('_form', [
         'model' => $model,
         'items' => $items,
+        'users' => $users,
+        'modes' => $modes,
     ]) ?>
 
 </div>
