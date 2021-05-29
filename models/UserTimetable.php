@@ -85,4 +85,11 @@ class UserTimetable extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public static function getTypeList() {
+        return [
+            1 => 'Прием лекарства',
+            2 => 'Закупка лекарства',
+        ];
+    }
 }
