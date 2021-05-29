@@ -5,9 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\UserStore */
 /* @var $items array */
+/* @var $users array */
 
 $this->title = 'Добавить лекарство';
-$this->params['breadcrumbs'][] = ['label' => 'Мои лекарства', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-store-create">
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
         'items' => $items,
+        'users' => $users,
     ]) ?>
 
 </div>

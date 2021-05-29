@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\UserStoreSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Мои лекарства';
+$this->title = 'Моя аптечка';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-store-index">

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Item;
+use app\models\User;
 use app\models\UserStore;
 use app\models\UserStoreSearch;
 use yii\web\Controller;
@@ -82,6 +83,7 @@ class UserStoreController extends Controller
         return $this->render('create', [
             'model' => $model,
             'items' => Item::getList(),
+            'users' => User::getList(),
         ]);
     }
 
@@ -103,6 +105,7 @@ class UserStoreController extends Controller
         return $this->render('update', [
             'model' => $model,
             'items' => Item::getList(),
+            'users' => User::getList(),
         ]);
     }
 

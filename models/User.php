@@ -174,4 +174,13 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserTimetable::class, ['user_id' => 'id']);
     }
+
+    public static function getList(): array {
+        $list = [];
+        $models = self::find()->orderBy('fio')->all();
+        foreach($models as $model) {
+            $list[$model->id] = $model->fio;
+        }
+        return $list;
+    }
 }
