@@ -126,4 +126,13 @@ class Item extends \yii\db\ActiveRecord
             3 => 'Три раза в день'
         ];
     }
+
+    public static function getList(): array {
+        $list = [];
+        $models = self::find()->orderBy('name')->all();
+        foreach($models as $model) {
+            $list[$model->id] = $model->name;
+        }
+        return $list;
+    }
 }
