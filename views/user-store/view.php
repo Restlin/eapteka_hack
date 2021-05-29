@@ -31,7 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'user.fio',
-            'item.name',
+            [
+                'attribute' => 'item_id',
+                'value' => Html::a($model->item->name, ['item/view', 'id' => $model->item_id]),
+                'format' => 'raw'
+            ],
             'amount',
             'target.fio',
             'regular:boolean',
