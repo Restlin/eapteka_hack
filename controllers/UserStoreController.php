@@ -50,6 +50,7 @@ class UserStoreController extends Controller
             'dataProvider' => $dataProvider,
             'items' => Item::getList(),
             'users' => User::getList(),
+            'modes' => UserStore::getStoreModeList(),
         ]);
     }
 

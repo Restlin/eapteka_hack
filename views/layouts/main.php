@@ -28,15 +28,14 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    $home = Yii::$app->homeUrl;
     NavBar::begin([
         'brandLabel' => <<<HTML
             <div class="logo">
-                <a href="logo__link">
                     <img src="images/logo.svg" alt="">
-                </a>
             </div>
 HTML,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => $home,
         'options' => [
             'class' => 'navbar navbar-default navbar-fixed-top',
         ],

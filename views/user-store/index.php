@@ -10,6 +10,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $items array */
 /* @var $users array */
+/* @var $modes array */
 
 $this->title = 'Моя аптечка';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,15 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel, 'items' => $items, 'users' => $users]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel, 'items' => $items, 'users' => $users, 'modes' => $modes]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'col-sm-6 col-md-4'],
         'itemView' => function (UserStore $model, $key, $index, $widget) {
         $name = Html::a(Html::encode($model->item->name), ['view', 'id' => $model->id]);
-        $dayMode = "";
-        $foodMode = "";
         return <<<HTML
         <div class="thumbnail card">
               <img src="images/noImage.jpg" alt="..." />
