@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'image')->fileInput() ?>
+
     <?= $form->field($model, 'fio')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
@@ -21,7 +23,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'role')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-sm btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

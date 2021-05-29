@@ -22,14 +22,22 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="col-md-12 col-xs-12">
                 <div class="imageWrapper">
-                    <img src="images/noImage.jpg" alt="" />
+                    <?php
+                    $stream = $model->item->image ? stream_get_contents($model->item->image) : false;
+                    if ($stream) {
+                        $image = 'data:image/jpeg;charset=utf-8;base64,' . base64_encode($stream);
+                        echo Html::img($image, ['style' => '...']);
+                    } else {
+                        echo Html::img('images/noImage.jpg');
+                    }
+                    ?>
                 </div>
                 <br />
 
-                <div class="btn-group group-btn">
-                    <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-pencil']), ['update', 'id' => $model->id], ['class' => 'btn btn-circle btn-default btn-primary']) ?>
-                    <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-trash']), ['delete', 'id' => $model->id], [
-                        'class' => 'btn btn-circle btn-default btn-danger btn-primary',
+                <div class="btn-group">
+                    <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
+                    <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-sm btn-danger btn-primary',
                         'data' => [
                             'confirm' => 'Вы уверены, что хотите удалить этот препарат?',
                             'method' => 'post',

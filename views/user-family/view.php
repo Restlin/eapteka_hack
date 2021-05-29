@@ -11,28 +11,15 @@ use yii\widgets\DetailView;
 ?>
 <div class="user-family-view">
 
-    <p>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+    <p class="addedItem">
+        <span style="font-size: 18px"><?= $model->user2->fio ?> (<?= $roles[$model->role] ?>)</span>
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/user-family/delete', 'id' => $model->id], [
+            'class' => '',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить этого родственника?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            [
-                'attribute' => 'role',
-                'value' => $roles[$model->role]
-            ],
-            [
-                'attribute' => 'user_id2',
-                'value' => $model->user2->fio
-            ],
-        ],
-    ]) ?>
 
 </div>

@@ -21,14 +21,20 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'target_id')->dropDownList($users) ?>
+    <div class="row">
+        <div class="col-md-6 col-xs-6">
+            <?= $form->field($model, 'target_id')->dropDownList($users) ?>
+        </div>
+        <div class="col-md-6 col-xs-6">
+            <?= $form->field($model, 'mode')->dropDownList($modes) ?>
+        </div>
+    </div>
 
 
-    <?php echo $form->field($model, 'mode')->dropDownList($modes) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Сброс', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-sm btn-primary']) ?>
+        <?= Html::resetButton('Сброс', ['class' => 'btn btn-sm btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -12,6 +12,7 @@ use Yii;
  * @property string $email Email
  * @property string|null $password_hash Хеш пароля
  * @property int $role Роль
+ * @property string $image
  *
  * @property DiagnosisSubstance[] $diagnosisSubstances
  * @property Prescription[] $prescriptions
@@ -48,6 +49,7 @@ class User extends \yii\db\ActiveRecord
             [['email'], 'string', 'max' => 50],
             [['password_hash'], 'string', 'max' => 64],
             [['email'], 'unique'],
+            [['image'], 'string'],
         ];
     }
 
@@ -62,6 +64,7 @@ class User extends \yii\db\ActiveRecord
             'email' => 'Email',
             'password_hash' => 'Хеш пароля',
             'role' => 'Роль',
+            'image' => 'Фото',
         ];
     }
 

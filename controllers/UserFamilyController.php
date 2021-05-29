@@ -114,9 +114,11 @@ class UserFamilyController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $userId = $model->user_id1;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/user/view', 'id' => $userId]);
     }
 
     /**

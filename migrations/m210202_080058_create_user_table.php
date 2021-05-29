@@ -20,6 +20,7 @@ class m210202_080058_create_user_table extends Migration
             'email' => $this->string(50)->notNull()->unique()->comment('Email'),
             'password_hash' => $this->string(64)->comment('Хеш пароля'),
             'role' => $this->integer()->notNull()->defaultValue(self::ROLE_USER)->comment('Роль'),
+            'image' => $this->binary()->defaultValue(null)->comment('Фото'),
         ]);
 
         $this->insert('{{%user}}', [

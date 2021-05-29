@@ -10,9 +10,10 @@ use yii\widgets\DetailView;
 ?>
 <div class="user-diagnosis-view">
 
-    <p>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+    <p class="addedItem">
+        <span style="font-size: 18px"><?= $model->diagnosis->name ?> <?= $model->regular ? '(Хронический)' : ''?></span>
+        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['/user-diagnosis/delete', 'id' => $model->id], [
+            'class' => '',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить диагноз?',
                 'method' => 'post',
@@ -20,15 +21,5 @@ use yii\widgets\DetailView;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            [
-                'attribute' => 'diagnosis_id',
-                'value' => $model->diagnosis->name,
-            ],
-            'regular:boolean',
-        ],
-    ]) ?>
 
 </div>

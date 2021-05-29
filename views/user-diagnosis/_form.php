@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'regular')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Добавить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Добавить', ['class' => 'btn btn-sm btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

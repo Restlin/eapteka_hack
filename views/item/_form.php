@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'image')->fileInput() ?>
+
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'group_id')->dropDownList($groups) ?>
@@ -39,7 +41,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'amount')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-sm btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

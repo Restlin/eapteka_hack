@@ -16,18 +16,29 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'item_id')->dropDownList($items) ?>
+    <div class="col-md-12">
+        <?= $form->field($model, 'item_id')->dropDownList($items) ?>
+    </div>
 
-    <?= $form->field($model, 'amount')->textInput() ?>
+    <div class="col-md-4 col-xs-6">
+        <?= $form->field($model, 'amount')->textInput() ?>
+    </div>
 
-    <?= $form->field($model, 'target_id')->dropDownList($users) ?>
+    <div class="col-md-4 col-xs-6">
+        <?= $form->field($model, 'target_id')->dropDownList($users) ?>
+    </div>
 
-    <?= $form->field($model, 'regular')->checkbox() ?>
+    <div class="col-md-4 col-xs-12">
+        <?= $form->field($model, 'mode')->dropDownList($modes) ?>
+    </div>
 
-    <?= $form->field($model, 'mode')->dropDownList($modes) ?>
+    <div class="col-md-12">
+        <?= $form->field($model, 'regular')->checkbox() ?>
+    </div>
+
 
     <div class="form-group">
-        <?= Html::submitButton('Купить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Купить', ['class' => 'btn btn-sm btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

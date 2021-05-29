@@ -19,6 +19,7 @@ use Yii;
  * @property string|null $content Описание
  * @property float|null $price Стоимость
  * @property integer $amount количество в упаковке
+ * @property string $image
  *
  * @property Group $group
  * @property Substance $substance
@@ -50,6 +51,7 @@ class Item extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 100],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::class, 'targetAttribute' => ['group_id' => 'id']],
             [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id' => 'id']],
+            [['image'], 'string'],
         ];
     }
 
@@ -71,6 +73,7 @@ class Item extends \yii\db\ActiveRecord
             'content' => 'Описание',
             'price' => 'Стоимость, рубли',
             'amount' => 'Количество в упаковке, штуки',
+            'image' => 'Фото',
         ];
     }
 

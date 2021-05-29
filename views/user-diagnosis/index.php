@@ -10,19 +10,21 @@ use yii\widgets\Pjax;
 ?>
 <div class="user-diagnosis-index">
 
-    <h1>Диагнозы</h1>
-
-    <p>
-        <?= Html::a('Добавить диагноз', ['user-diagnosis/create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
 
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => 'view',
-    ]) ?>
+    <div class="col-md-12">
+        <div class="rowCenter">
+            <h3>Диагнозы</h3>
+            <?= Html::a('Добавить', ['user-diagnosis/create'], ['class' => 'btn btn-sm btn-hmetac btn-success']) ?>
+        </div>
+        <br />
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemOptions' => ['class' => 'item'],
+            'itemView' => 'view',
+        ]) ?>
+
+    </div>
 
     <?php Pjax::end(); ?>
 

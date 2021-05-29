@@ -11,21 +11,25 @@ use yii\widgets\Pjax;
 ?>
 <div class="user-family-index">
 
-    <h1>Родственники</h1>
-
-    <p>
-        <?= Html::a('Добавить родственника', ['user-family/create', 'user_id' => $searchModel->user_id1], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
 
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => 'view',
-        'viewParams' => ['roles' => $roles],
-    ]) ?>
+    <div class="col-md-12">
+        <div class="rowCenter">
+            <h3>Родственники</h3>
+            <?= Html::a('Добавить', ['user-family/create', 'user_id' => $searchModel->user_id1], ['class' => 'btn btn-sm btn-hmetac btn-success']) ?>
+        </div>
+        <br />
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemOptions' => ['class' => 'item'],
+            'itemView' => 'view',
+            'viewParams' => ['roles' => $roles],
+        ]) ?>
+
+    </div>
 
     <?php Pjax::end(); ?>
+
+
 
 </div>

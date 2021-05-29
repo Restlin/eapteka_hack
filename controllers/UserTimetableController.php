@@ -6,6 +6,7 @@ use app\models\UserTimetable;
 use app\models\UserTimetableSearch;
 use DateTimeImmutable;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -68,8 +69,12 @@ class UserTimetableController extends Controller
             ->joinWith(['item'])
             ->andWhere(['between', 'date', $datetime->format('d.m.Y 00:00:00'), $datetime->format('d.m.Y 23:59:59')])
             ->asArray()
-            ->orderBy('date asc')
+            ->orderBy(['date' => SORT_ASC, 'id' => SORT_DESC])
             ->all();
+        foreach ($list as $key => $element) {
+            ArrayHelper::setValue($element, 'item.image', '');
+            $list[$key] = $element;
+        }
         $list['length'] = count($list);
         return $list;
     }

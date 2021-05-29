@@ -32,7 +32,9 @@ AppAsset::register($this);
     NavBar::begin([
         'brandLabel' => <<<HTML
             <div class="logo">
-                    <img src="images/logo.svg" alt="">
+<!--            <img src="images/logo.svg" alt="">-->
+                    <img src="images/sber-eapteka-logo.svg" alt="">
+
             </div>
 HTML,
         'brandUrl' => $home,
@@ -53,7 +55,7 @@ HTML,
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Выход (' . Yii::$app->user->identity->getUser()->email . ')',
-                    ['class' => 'btn btn-link logout']
+                    ['class' => 'btn btn-sm btn-link logout']
                 )
                 . Html::endForm()
                 . '</li>'
