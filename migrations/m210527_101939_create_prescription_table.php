@@ -71,7 +71,7 @@ class m210527_101939_create_prescription_table extends Migration
         $this->createIndex("idx_{$tableName}_author_id", $tableName, 'author_id');
         $this->addForeignKey("fk_{$tableName}_patient_id", $tableName, 'patient_id', 'user', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_patient_id", $tableName, 'patient_id');
-        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'user', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'diagnosis', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id');
     }
 

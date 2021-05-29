@@ -33,7 +33,7 @@ class m210527_102002_create_substance_table extends Migration
         ]);
 
         $tableName = "diagnosis_substance";
-        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'user', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'diagnosis', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id');
         $this->addForeignKey("fk_{$tableName}_substance_id", $tableName, 'substance_id', 'substance', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_substance_id", $tableName, 'substance_id');
@@ -47,7 +47,7 @@ class m210527_102002_create_substance_table extends Migration
         ]);
 
         $tableName = "user_diagnosis";
-        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'user', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey("fk_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id', 'diagnosis', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_diagnosis_id", $tableName, 'diagnosis_id');
         $this->addForeignKey("fk_{$tableName}_user_id", $tableName, 'user_id', 'user', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_user_id", $tableName, 'user_id');
