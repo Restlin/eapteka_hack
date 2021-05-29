@@ -8,6 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $items array */
 /* @var $users array */
+/* @var $modes array */
 ?>
 
 <div class="user-store-search">
@@ -23,7 +24,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'target_id')->dropDownList($users) ?>
 
 
-    <?php echo $form->field($model, 'mode') ?>
+    <?php echo $form->field($model, 'mode')->dropDownList($modes) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
