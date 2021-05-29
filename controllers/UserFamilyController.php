@@ -2,16 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Prescription;
-use app\models\PrescriptionSearch;
+use app\models\UserFamily;
+use app\models\User;
+use app\models\UserFamilySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrescriptionController implements the CRUD actions for Prescription model.
+ * UserFamilyController implements the CRUD actions for UserFamily model.
  */
-class PrescriptionController extends Controller
+class UserFamilyController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +33,12 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Lists all Prescription models.
+     * Lists all UserFamily models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrescriptionSearch();
+        $searchModel = new UserFamilySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +48,7 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Displays a single Prescription model.
+     * Displays a single UserFamily model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,17 +61,18 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Creates a new Prescription model.
+     * Creates a new UserFamily model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($user_id)
     {
-        $model = new Prescription();
+        $model = new UserFamily();
+        $model->user_id1 = $user_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['user/view', 'id' => $model->user_id1]);
             }
         } else {
             $model->loadDefaultValues();
@@ -78,11 +80,13 @@ class PrescriptionController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'users' => User::getList(),
+            'roles' => UserFamily::getRoleList(),
         ]);
     }
 
     /**
-     * Updates an existing Prescription model.
+     * Updates an existing UserFamily model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,7 +106,7 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Deletes an existing Prescription model.
+     * Deletes an existing UserFamily model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -116,15 +120,15 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Finds the Prescription model based on its primary key value.
+     * Finds the UserFamily model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prescription the loaded model
+     * @return UserFamily the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prescription::findOne($id)) !== null) {
+        if (($model = UserFamily::findOne($id)) !== null) {
             return $model;
         }
 

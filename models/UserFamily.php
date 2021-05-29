@@ -13,7 +13,7 @@ use Yii;
  * @property int $role Тип связи
  *
  * @property User $userId1
- * @property User $userId2
+ * @property User $user2
  */
 class UserFamily extends \yii\db\ActiveRecord
 {
@@ -67,8 +67,15 @@ class UserFamily extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUserId2()
+    public function getUser2()
     {
         return $this->hasOne(User::class, ['id' => 'user_id2']);
+    }
+
+    public static function getRoleList(): array {
+        return [
+            1 => 'Ребенок',
+            2 => 'Родитель'
+        ];
     }
 }

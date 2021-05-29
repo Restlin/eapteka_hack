@@ -2,16 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Prescription;
-use app\models\PrescriptionSearch;
+use app\models\UserDiagnosis;
+use app\models\Diagnosis;
+use app\models\UserDiagnosisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrescriptionController implements the CRUD actions for Prescription model.
+ * UserDiagnosisController implements the CRUD actions for UserDiagnosis model.
  */
-class PrescriptionController extends Controller
+class UserDiagnosisController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +33,12 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Lists all Prescription models.
+     * Lists all UserDiagnosis models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrescriptionSearch();
+        $searchModel = new UserDiagnosisSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +48,7 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Displays a single Prescription model.
+     * Displays a single UserDiagnosis model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,17 +61,18 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Creates a new Prescription model.
+     * Creates a new UserDiagnosis model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prescription();
+        $model = new UserDiagnosis();
+        $model->user_id = \Yii::$app->user->id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['user/view', 'id' => $model->user_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -78,31 +80,12 @@ class PrescriptionController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'diagnosises' => Diagnosis::getList(),
         ]);
     }
 
     /**
-     * Updates an existing Prescription model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Prescription model.
+     * Deletes an existing UserDiagnosis model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,21 +93,22 @@ class PrescriptionController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['user/view', 'id' => $model->user_id]);
     }
 
     /**
-     * Finds the Prescription model based on its primary key value.
+     * Finds the UserDiagnosis model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prescription the loaded model
+     * @return UserDiagnosis the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prescription::findOne($id)) !== null) {
+        if (($model = UserDiagnosis::findOne($id)) !== null) {
             return $model;
         }
 

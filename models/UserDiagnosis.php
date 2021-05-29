@@ -36,7 +36,7 @@ class UserDiagnosis extends \yii\db\ActiveRecord
             [['user_id', 'diagnosis_id'], 'integer'],
             [['regular'], 'boolean'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => Diagnosis::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -49,7 +49,7 @@ class UserDiagnosis extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'Пользователь',
             'diagnosis_id' => 'Диагноз',
-            'regular' => 'Регулярный прием',
+            'regular' => 'Хронический',
         ];
     }
 
@@ -60,7 +60,7 @@ class UserDiagnosis extends \yii\db\ActiveRecord
      */
     public function getDiagnosis()
     {
-        return $this->hasOne(User::class, ['id' => 'diagnosis_id']);
+        return $this->hasOne(Diagnosis::class, ['id' => 'diagnosis_id']);
     }
 
     /**

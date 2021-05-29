@@ -2,16 +2,19 @@
 
 namespace app\controllers;
 
-use app\models\Prescription;
-use app\models\PrescriptionSearch;
+use app\models\User;
+use app\models\UserSearch;
+use app\models\UserDiagnosisSearch;
+use app\models\UserFamily;
+use app\models\UserFamilySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrescriptionController implements the CRUD actions for Prescription model.
+ * UserController implements the CRUD actions for User model.
  */
-class PrescriptionController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +35,12 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Lists all Prescription models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrescriptionSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,26 +50,52 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Displays a single Prescription model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+        $user = $this->findModel($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $user,
+            'familyIndex' => $this->renderFamily($user),
+            'diagnosisIndex' => $this->renderDiagnosis($user)
+        ]);
+    }
+    public function renderDiagnosis(User $user) {
+        $searchModel = new UserDiagnosisSearch();
+        $searchModel->user_id = $user->id;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->renderPartial('/user-diagnosis/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function renderFamily(User $user)
+    {
+        $searchModel = new UserFamilySearch();
+        $searchModel->user_id1 = $user->id;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->renderPartial('/user-family/index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'roles' => UserFamily::getRoleList(),
         ]);
     }
 
     /**
-     * Creates a new Prescription model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prescription();
+        $model = new User();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -82,7 +111,7 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Updates an existing Prescription model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -102,7 +131,7 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Deletes an existing Prescription model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -116,15 +145,15 @@ class PrescriptionController extends Controller
     }
 
     /**
-     * Finds the Prescription model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prescription the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prescription::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 
