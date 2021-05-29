@@ -161,7 +161,7 @@ class Item extends \yii\db\ActiveRecord
         }
         $models = $query->all();
         foreach($models as $model) {
-            $list[$model->id] = $model->name;
+            $list[$model->id] = $model->price.' руб. - '.$model->name;
         }
         return $list;
     }

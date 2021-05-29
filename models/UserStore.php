@@ -109,6 +109,9 @@ class UserStore extends \yii\db\ActiveRecord
             }
             $now->modify(" +1 days");
         }
+        if(!$insert && $this->amount < 3 && $this->regular) { //@todo хардкод по прототипу
+            $this->createTimetableAboutProduct();
+        }
         parent::afterSave($insert, $changedAttributes);
     }
 
@@ -120,6 +123,19 @@ class UserStore extends \yii\db\ActiveRecord
         $timetable->complete = false;
         $timetable->date = $date;
         $timetable->content = $content;
+        $timetable->save();
+    }
+
+    private function createTimetableAboutProduct() {
+        $timetable = new UserTimetable();
+        $timetable->user_id = $this->user_id;
+        $timetable->item_id = $this->item_id;
+        $timetable->type = UserTimetable::TYPE_ITEM;
+        $timetable->complete = false;
+        $date = new \DateTime();
+        $date->modify('+15 minutes');
+        $timetable->date = $date->format('d.m.Y H:i:s');
+        $timetable->content = 'Необходимо пополнить запас в аптечке!';
         $timetable->save();
     }
 }

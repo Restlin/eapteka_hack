@@ -43,11 +43,9 @@ HTML,
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Расписание', 'url' => ['/user-timetable']],
             ['label' => 'Моя аптечка', 'url' => ['/user-store']],
             ['label' => 'Рецепты', 'url' => ['/prescription']],
             ['label' => 'Личный кабинет', 'url' => ['user/view', 'id' => \Yii::$app->user->id]],
-            ['label' => 'Препараты', 'url' => ['/item']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (

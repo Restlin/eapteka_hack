@@ -24,6 +24,10 @@ class UserTimetable extends \yii\db\ActiveRecord
      * Прием лекарств
      */
     const TYPE_RECEPTION = 1;
+    /**
+     * Пополнение запаса
+     */
+    const TYPE_ITEM = 2;
 
     /**
      * {@inheritdoc}

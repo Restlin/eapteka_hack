@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $users array */
 /* @var $modes array */
 
-$this->title = 'Добавить лекарство';
+$this->title = 'Купить лекарство';
 $this->params['breadcrumbs'][] = ['label' => 'Моя аптечка', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
