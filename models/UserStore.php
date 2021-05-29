@@ -97,4 +97,28 @@ class UserStore extends \yii\db\ActiveRecord
             2 => 'Домой',
         ];
     }
+
+    public function afterSave($insert, $changedAttributes) {
+        $now = new \DateTime();
+        $times = $this->item->getTimes();
+        $content = $this->item->getModeContent();
+        $date = $now->format('d.m.Y');
+        for($day = 0; $day< 3; $day++) { //@todo заменить на курс приема из справочника. Константа для прототипа
+            foreach($times as $time) {
+                $this->createTimetable($date.' '.$time, $content);
+            }
+        }
+        parent::afterSave($insert, $changedAttributes);
+    }
+    
+    private function createTimetable($date, $content) {
+        $timetable = new UserTimetable();
+        $timetable->user_id = $this->target_id;
+        $timetable->item_id = $this->item_id;
+        $timetable->type = UserTimetable::TYPE_RECEPTION;
+        $timetable->complete = false;
+        $timetable->date = $date;
+        $timetable->content = $content;
+        $timetable->save();
+    }
 }

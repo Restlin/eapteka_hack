@@ -130,6 +130,29 @@ class Item extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getTimes(): array {
+        if($this->food_mode == 1) {
+            $times = ['7:30', '11:30', '17:30'];
+        } elseif($this->food_mode == 2) {
+            $times = ['8:00', '12:00', '18:00'];
+        } else {
+            $times = ['8:30', '12:30', '18:30'];
+        }
+        if($this->per_day == 1) {
+            unset($times[2]);
+            unset($times[0]);
+        } elseif($this->per_day == 2) {
+            unset($times[1]);
+        }
+        return $times;
+    }
+
+    public function getModeContent(): string {
+        $foodModes = self::getFoodModeList();
+        $perDayModes = self::getPerDayModeList();
+        return $perDayModes[$this->per_day].' '.mb_strtolower($foodModes[$this->food_mode], 'UTF-8');
+    }
+
     public static function getList(): array {
         $list = [];
         $models = self::find()->orderBy('name')->all();

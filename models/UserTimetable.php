@@ -21,6 +21,11 @@ use Yii;
 class UserTimetable extends \yii\db\ActiveRecord
 {
     /**
+     * Прием лекарств
+     */
+    const TYPE_RECEPTION = 1;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
