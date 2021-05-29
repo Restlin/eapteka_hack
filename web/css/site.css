@@ -113,3 +113,144 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+
+
+
+
+
+
+.logo {
+    width: 175px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #27a8e0;
+}
+.logo__link {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.pageWrapper {
+    padding: 20px 0;
+}
+
+.pageTopAdditional {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-additional {
+    margin-top: auto;
+}
+
+.card-caption {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardContent {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.cardContent-1 {
+    -webkit-line-clamp: 1;
+}
+.cardContent-2 {
+    -webkit-line-clamp: 2;
+}
+.cardContent-3 {
+    -webkit-line-clamp: 3;
+}
+.cardContent-4 {
+    -webkit-line-clamp: 4;
+}
+.cardContent-5 {
+    -webkit-line-clamp: 5;
+}
+.cardContent-6 {
+    -webkit-line-clamp: 6;
+}
+
+.imageWrapper img {
+    width: 250px;
+    object-fit: cover;
+}
+@media (max-width: 550px) {
+    .imageWrapper img {
+        width: 100%;
+    }
+}
+
+.indTopLine {
+    width: 100%;
+    display: flex;
+    column-gap: 10px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+.indTopLine__button-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+.indTopLine__button-wrapper div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+@media (max-width: 550px) {
+    .indTopLine__button-wrapper {
+        row-gap: 5px;
+    }
+    .indTopLine__button-wrapper div {
+        display: flex;
+        flex-direction: row;
+        row-gap: 5px;
+        column-gap: 10px;
+    }
+    .indTopLine__button-wrapper div .btn {
+        width: 120px;
+    }
+}
+
+.btn-circle {
+    border-radius: 50% !important;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-btn {
+    display: flex;
+    column-gap: 10px;
+}
+
+.alert-center {
+    display: flex;
+    align-items: center;
+}
+.alert-center h1, .alert-center h2, .alert-center h3, .alert-center h4, .alert-center h5, .alert-center h6 {
+    margin: 0;
+}
