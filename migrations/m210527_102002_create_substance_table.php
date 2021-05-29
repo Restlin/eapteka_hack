@@ -43,6 +43,11 @@ class m210527_102002_create_substance_table extends Migration
         $this->addForeignKey("fk_{$tableName}_substance_id", $tableName, 'substance_id', 'substance', 'id', 'CASCADE', 'CASCADE');
         $this->createIndex("idx_{$tableName}_substance_id", $tableName, 'substance_id');
 
+        $this->insert($tableName, [
+            'substance_id' => 2,
+            'diagnosis_id' => 38
+        ]);
+
 
         $this->createTable('{{%user_diagnosis}}', [
             'id' => $this->primaryKey(),

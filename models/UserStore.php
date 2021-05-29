@@ -98,6 +98,19 @@ class UserStore extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeValidate() {
+        if($this->target) {
+            foreach($this->target->userDiagnoses as $userDiagnos) {
+                foreach($userDiagnos->diagnosis->diagnosisSubstances as $diagnosisSubstance) {
+                    if($diagnosisSubstance->substance_id == $this->item->substance_id) {
+                        $this->addError('item_id', 'Это лекарство противопоказано Вам из-за вашего диагноза: '.$diagnosisSubstance->diagnosis->name.'!');
+                    }
+                }
+            }
+        }
+        return parent::beforeValidate();
+    }
+
     public function afterSave($insert, $changedAttributes) {
         $now = new \DateTime();
         $times = $this->item->getTimes();

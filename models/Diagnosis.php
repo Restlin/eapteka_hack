@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name Наименование
+ * @property DiagnosisSubstance[] $diagnosisSubstances
  */
 class Diagnosis extends \yii\db\ActiveRecord
 {
@@ -41,7 +42,7 @@ class Diagnosis extends \yii\db\ActiveRecord
             'name' => 'Наименование',
         ];
     }
-    
+
     public static function getList(): array {
         $list = [];
         $models = self::find()->orderBy('name')->all();
@@ -49,5 +50,14 @@ class Diagnosis extends \yii\db\ActiveRecord
             $list[$model->id] = $model->name;
         }
         return $list;
+    }
+    /**
+     * Gets query for [[DiagnosisSubstances]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosisSubstances()
+    {
+        return $this->hasMany(DiagnosisSubstance::class, ['diagnosis_id' => 'id']);
     }
 }

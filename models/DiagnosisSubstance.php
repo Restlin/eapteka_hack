@@ -34,7 +34,7 @@ class DiagnosisSubstance extends \yii\db\ActiveRecord
             [['substance_id', 'diagnosis_id'], 'default', 'value' => null],
             [['substance_id', 'diagnosis_id'], 'integer'],
             [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id' => 'id']],
-            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => Diagnosis::class, 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -57,7 +57,7 @@ class DiagnosisSubstance extends \yii\db\ActiveRecord
      */
     public function getDiagnosis()
     {
-        return $this->hasOne(User::class, ['id' => 'diagnosis_id']);
+        return $this->hasOne(Diagnosis::class, ['id' => 'diagnosis_id']);
     }
 
     /**
