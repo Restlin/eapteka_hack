@@ -5,21 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "group".
+ * This is the model class for table "diagnosis".
  *
  * @property int $id
  * @property string $name Наименование
- *
- * @property Item[] $items
  */
-class Group extends \yii\db\ActiveRecord
+class Diagnosis extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'group';
+        return 'diagnosis';
     }
 
     /**
@@ -42,15 +40,5 @@ class Group extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Наименование',
         ];
-    }
-
-    /**
-     * Gets query for [[Items]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getItems()
-    {
-        return $this->hasMany(Item::className(), ['group_id' => 'id']);
     }
 }

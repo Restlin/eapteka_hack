@@ -2,25 +2,22 @@
 
 namespace app\models;
 
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
- * Активное вещество
+ * This is the model class for table "substance".
  *
  * @property int $id
  * @property string $name Наименование
  * @property string $description Описание
  *
+ * @property DiagnosisSubstance[] $diagnosisSubstances
  * @property Item[] $items
- * @property PrescriptionItem[] $prescriptionItems Товары в рецепте
+ * @property PrescriptionItem[] $prescriptionItems
  * @property SubstanceEffect[] $substanceEffects
  * @property SubstanceEffect[] $substanceEffects0
- *
- * @package app\models
- * @author Dmitrii N <https://github.com/johnny-silverhand>
  */
-class Substance extends ActiveRecord
+class Substance extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -55,42 +52,52 @@ class Substance extends ActiveRecord
     }
 
     /**
+     * Gets query for [[DiagnosisSubstances]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosisSubstances()
+    {
+        return $this->hasMany(DiagnosisSubstance::className(), ['substance_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[Items]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getItems(): ActiveQuery
+    public function getItems()
     {
-        return $this->hasMany(Item::class, ['substance_id' => 'id']);
+        return $this->hasMany(Item::className(), ['substance_id' => 'id']);
     }
 
     /**
      * Gets query for [[PrescriptionItems]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getPrescriptionItems(): ActiveQuery
+    public function getPrescriptionItems()
     {
-        return $this->hasMany(PrescriptionItem::class, ['substance_id' => 'id']);
+        return $this->hasMany(PrescriptionItem::className(), ['substance_id' => 'id']);
     }
 
     /**
      * Gets query for [[SubstanceEffects]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getSubstanceEffects(): ActiveQuery
+    public function getSubstanceEffects()
     {
-        return $this->hasMany(SubstanceEffect::class, ['substance_id1' => 'id']);
+        return $this->hasMany(SubstanceEffect::className(), ['substance_id1' => 'id']);
     }
 
     /**
      * Gets query for [[SubstanceEffects0]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getSubstanceEffects0(): ActiveQuery
+    public function getSubstanceEffects0()
     {
-        return $this->hasMany(SubstanceEffect::class, ['substance_id2' => 'id']);
+        return $this->hasMany(SubstanceEffect::className(), ['substance_id2' => 'id']);
     }
 }

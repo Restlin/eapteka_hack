@@ -5,22 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "prescription_item".
+ * This is the model class for table "diagnosis_substance".
  *
  * @property int $id
  * @property int $substance_id Активное вещество
- * @property float $dose Доза активного вещества
+ * @property int $diagnosis_id Диагноз
  *
+ * @property User $diagnosis
  * @property Substance $substance
  */
-class PrescriptionItem extends \yii\db\ActiveRecord
+class DiagnosisSubstance extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'prescription_item';
+        return 'diagnosis_substance';
     }
 
     /**
@@ -29,11 +30,11 @@ class PrescriptionItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['substance_id', 'dose'], 'required'],
-            [['substance_id'], 'default', 'value' => null],
-            [['substance_id'], 'integer'],
-            [['dose'], 'number'],
+            [['substance_id', 'diagnosis_id'], 'required'],
+            [['substance_id', 'diagnosis_id'], 'default', 'value' => null],
+            [['substance_id', 'diagnosis_id'], 'integer'],
             [['substance_id'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -45,8 +46,18 @@ class PrescriptionItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'substance_id' => 'Активное вещество',
-            'dose' => 'Доза активного вещества',
+            'diagnosis_id' => 'Диагноз',
         ];
+    }
+
+    /**
+     * Gets query for [[Diagnosis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosis()
+    {
+        return $this->hasOne(User::className(), ['id' => 'diagnosis_id']);
     }
 
     /**

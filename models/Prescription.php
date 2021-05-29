@@ -2,25 +2,22 @@
 
 namespace app\models;
 
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
- * Рецепт
+ * This is the model class for table "prescription".
  *
  * @property int $id
  * @property int $author_id Автор
  * @property int $patient_id Пациент
+ * @property int $diagnosis_id Диагноз
  * @property string $date Дата рецепта
  *
- * @property User $author Автор
- * @property User $patient Пациент
- * @property PrescriptionItem[] $prescriptionItems Товары в рецепте
- *
- * @package app\models
- * @author Dmitrii N <https://github.com/johnny-silverhand>
+ * @property User $author
+ * @property User $diagnosis
+ * @property User $patient
  */
-class Prescription extends ActiveRecord
+class Prescription extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,12 +33,13 @@ class Prescription extends ActiveRecord
     public function rules()
     {
         return [
-            [['author_id', 'patient_id', 'date'], 'required'],
-            [['author_id', 'patient_id'], 'default', 'value' => null],
-            [['author_id', 'patient_id'], 'integer'],
+            [['author_id', 'patient_id', 'diagnosis_id', 'date'], 'required'],
+            [['author_id', 'patient_id', 'diagnosis_id'], 'default', 'value' => null],
+            [['author_id', 'patient_id', 'diagnosis_id'], 'integer'],
             [['date'], 'safe'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
-            [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['patient_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
+            [['patient_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['patient_id' => 'id']],
+            [['diagnosis_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['diagnosis_id' => 'id']],
         ];
     }
 
@@ -54,6 +52,7 @@ class Prescription extends ActiveRecord
             'id' => 'ID',
             'author_id' => 'Автор',
             'patient_id' => 'Пациент',
+            'diagnosis_id' => 'Диагноз',
             'date' => 'Дата рецепта',
         ];
     }
@@ -61,30 +60,30 @@ class Prescription extends ActiveRecord
     /**
      * Gets query for [[Author]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getAuthor(): ActiveQuery
+    public function getAuthor()
     {
-        return $this->hasOne(User::class, ['id' => 'author_id']);
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * Gets query for [[Diagnosis]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDiagnosis()
+    {
+        return $this->hasOne(User::className(), ['id' => 'diagnosis_id']);
     }
 
     /**
      * Gets query for [[Patient]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getPatient(): ActiveQuery
+    public function getPatient()
     {
-        return $this->hasOne(User::class, ['id' => 'patient_id']);
-    }
-
-    /**
-     * Gets query for [[PrescriptionItems]].
-     *
-     * @return ActiveQuery
-     */
-    public function getPrescriptionItems(): ActiveQuery
-    {
-        return $this->hasMany(PrescriptionItem::class, ['substance_id' => 'id']);
+        return $this->hasOne(User::className(), ['id' => 'patient_id']);
     }
 }

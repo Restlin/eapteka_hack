@@ -2,11 +2,10 @@
 
 namespace app\models;
 
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
- * Пользователь
+ * This is the model class for table "user".
  *
  * @property int $id
  * @property string $fio ФИО
@@ -14,15 +13,19 @@ use yii\db\ActiveRecord;
  * @property string|null $password_hash Хеш пароля
  * @property int $role Роль
  *
- * @property Order[] $orders Заказы
- * @property Prescription[] $wrotePrescriptions Выписанные рецепты
- * @property Prescription[] $receivedPrescriptions Полученные рецепты
- * @property UserTimetable[] $userTimetables Расписание пользователя
- *
- * @package app\models
- * @author Dmitrii N <https://github.com/johnny-silverhand>
+ * @property DiagnosisSubstance[] $diagnosisSubstances
+ * @property Prescription[] $prescriptions
+ * @property Prescription[] $prescriptions0
+ * @property Prescription[] $prescriptions1
+ * @property UserDiagnosis[] $userDiagnoses
+ * @property UserDiagnosis[] $userDiagnoses0
+ * @property UserFamily[] $userFamilies
+ * @property UserFamily[] $userFamilies0
+ * @property UserStore[] $userStores
+ * @property UserStore[] $userStores0
+ * @property UserTimetable[] $userTimetables
  */
-class User extends ActiveRecord
+class User extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -63,42 +66,112 @@ class User extends ActiveRecord
     }
 
     /**
-     * Gets query for [[Orders]].
+     * Gets query for [[DiagnosisSubstances]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getOrders(): ActiveQuery
+    public function getDiagnosisSubstances()
     {
-        return $this->hasMany(Order::class, ['user_id' => 'id']);
+        return $this->hasMany(DiagnosisSubstance::className(), ['diagnosis_id' => 'id']);
     }
 
     /**
      * Gets query for [[Prescriptions]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getWrotePrescriptions(): ActiveQuery
+    public function getPrescriptions()
     {
-        return $this->hasMany(Prescription::class, ['author_id' => 'id']);
+        return $this->hasMany(Prescription::className(), ['author_id' => 'id']);
     }
 
     /**
      * Gets query for [[Prescriptions0]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getReceivedPrescriptions(): ActiveQuery
+    public function getPrescriptions0()
     {
-        return $this->hasMany(Prescription::class, ['patient_id' => 'id']);
+        return $this->hasMany(Prescription::className(), ['patient_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Prescriptions1]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPrescriptions1()
+    {
+        return $this->hasMany(Prescription::className(), ['diagnosis_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserDiagnoses]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserDiagnoses()
+    {
+        return $this->hasMany(UserDiagnosis::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserDiagnoses0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserDiagnoses0()
+    {
+        return $this->hasMany(UserDiagnosis::className(), ['diagnosis_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserFamilies]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserFamilies()
+    {
+        return $this->hasMany(UserFamily::className(), ['user_id1' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserFamilies0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserFamilies0()
+    {
+        return $this->hasMany(UserFamily::className(), ['user_id2' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserStores]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserStores()
+    {
+        return $this->hasMany(UserStore::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[UserStores0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserStores0()
+    {
+        return $this->hasMany(UserStore::className(), ['target_id' => 'id']);
     }
 
     /**
      * Gets query for [[UserTimetables]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getUserTimetables(): ActiveQuery
+    public function getUserTimetables()
     {
-        return $this->hasMany(UserTimetable::class, ['user_id' => 'id']);
+        return $this->hasMany(UserTimetable::className(), ['user_id' => 'id']);
     }
 }

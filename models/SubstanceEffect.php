@@ -2,11 +2,10 @@
 
 namespace app\models;
 
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
- * Связь активных веществ
+ * This is the model class for table "substance_effect".
  *
  * @property int $id
  * @property int $substance_id1 Вещество №1
@@ -14,10 +13,10 @@ use yii\db\ActiveRecord;
  * @property bool $positive Влияние
  * @property string $content Описание влияния
  *
- * @property Substance $substanceId1 Вещество №1
- * @property Substance $substanceId2 Вещество №2
+ * @property Substance $substanceId1
+ * @property Substance $substanceId2
  */
-class SubstanceEffect extends ActiveRecord
+class SubstanceEffect extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -38,8 +37,8 @@ class SubstanceEffect extends ActiveRecord
             [['substance_id1', 'substance_id2'], 'integer'],
             [['positive'], 'boolean'],
             [['content'], 'string'],
-            [['substance_id1'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id1' => 'id']],
-            [['substance_id2'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::class, 'targetAttribute' => ['substance_id2' => 'id']],
+            [['substance_id1'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id1' => 'id']],
+            [['substance_id2'], 'exist', 'skipOnError' => true, 'targetClass' => Substance::className(), 'targetAttribute' => ['substance_id2' => 'id']],
         ];
     }
 
@@ -60,20 +59,20 @@ class SubstanceEffect extends ActiveRecord
     /**
      * Gets query for [[SubstanceId1]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getSubstanceId1(): ActiveQuery
+    public function getSubstanceId1()
     {
-        return $this->hasOne(Substance::class, ['id' => 'substance_id1']);
+        return $this->hasOne(Substance::className(), ['id' => 'substance_id1']);
     }
 
     /**
      * Gets query for [[SubstanceId2]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getSubstanceId2(): ActiveQuery
+    public function getSubstanceId2()
     {
-        return $this->hasOne(Substance::class, ['id' => 'substance_id2']);
+        return $this->hasOne(Substance::className(), ['id' => 'substance_id2']);
     }
 }

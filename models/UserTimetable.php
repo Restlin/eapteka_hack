@@ -2,11 +2,10 @@
 
 namespace app\models;
 
-use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
- * Расписание
+ * This is the model class for table "user_timetable".
  *
  * @property int $id
  * @property int $user_id Пользователь
@@ -16,10 +15,10 @@ use yii\db\ActiveRecord;
  * @property int $type Тип
  * @property bool $complete Завершено
  *
- * @property Item $item Товар
- * @property User $user Пользователь
+ * @property Item $item
+ * @property User $user
  */
-class UserTimetable extends ActiveRecord
+class UserTimetable extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -38,11 +37,11 @@ class UserTimetable extends ActiveRecord
             [['user_id', 'date', 'content', 'item_id', 'type'], 'required'],
             [['user_id', 'item_id', 'type'], 'default', 'value' => null],
             [['user_id', 'item_id', 'type'], 'integer'],
-            [['complete'], 'boolean'],
             [['date'], 'safe'],
             [['content'], 'string'],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::class, 'targetAttribute' => ['item_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['complete'], 'boolean'],
+            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -58,27 +57,27 @@ class UserTimetable extends ActiveRecord
             'content' => 'Содержание события',
             'item_id' => 'Товар',
             'type' => 'Тип',
-            'complete' => 'Завершено'
+            'complete' => 'Завершено',
         ];
     }
 
     /**
      * Gets query for [[Item]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getItem(): ActiveQuery
+    public function getItem()
     {
-        return $this->hasOne(Item::class, ['id' => 'item_id']);
+        return $this->hasOne(Item::className(), ['id' => 'item_id']);
     }
 
     /**
      * Gets query for [[User]].
      *
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
-    public function getUser(): ActiveQuery
+    public function getUser()
     {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }
