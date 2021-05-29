@@ -4,22 +4,36 @@ namespace app\security;
 
 use Yii;
 use yii\base\Model;
-use app\security\UserIdentity as User;
 
 /**
- * LoginForm is the model behind the login form.
- *
- * @property-read User|null $user This property is read-only.
- *
+ * Форма входа пользователя
  */
 class LoginForm extends Model
 {
-    public $username;
-    public $password;
-    public $rememberMe = true;
 
-    private $_user = false;
+    /**
+     * Имя пользователя
+     * @var string|null
+     */
+    public ?string $username = null;
 
+    /**
+     * Пароль пользователя
+     * @var string|null
+     */
+    public ?string $password = null;
+
+    /**
+     * Запомнить пользователя после авторизации
+     * @var bool
+     */
+    public bool $rememberMe = true;
+
+    /**
+     * Идентификатор пользователя
+     * @var UserIdentity|null
+     */
+    private ?UserIdentity $userIdentity = null;
 
     /**
      * @return array the validation rules.
@@ -27,12 +41,12 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
             [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            [['username'], 'trim'],
+            [['username'], 'filter', 'filter' => fn($username) => mb_strtolower(trim($username), 'UTF-8')],
+            [['username'], 'email', 'message' => 'Необходимо ввести Email!'],
+            [['rememberMe'], 'boolean'],
+            [['password'], 'validatePassword'],
         ];
     }
 
@@ -46,12 +60,25 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            $identity = $this->getIdentity();
+            if (!$identity) {
+                $this->addError('username', 'Пользователь с таким Email не найден на сервисе!');
+            } elseif (!$identity->validatePassword($this->password)) {
+                $this->addError($attribute, 'Вы ввели неверный пароль!');
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Email',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня',
+        ];
     }
 
     /**
@@ -61,22 +88,21 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getIdentity(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         return false;
     }
 
     /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
+     * Поиск интерфейса идентификации по имени пользователя
+     * @return UserIdentity|null
      */
-    public function getUser()
+    public function getIdentity(): ?UserIdentity
     {
-        if ($this->_user === false) {
-            $this->_user = User::findIdentityByUsername($this->username);
+        if ($this->userIdentity === null) {
+            $this->userIdentity = UserIdentity::findIdentityByUsername($this->username);
         }
-
-        return $this->_user;
+        return $this->userIdentity;
     }
+
 }
