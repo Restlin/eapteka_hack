@@ -3,17 +3,12 @@
     <br>
 </p>
 
-<h4>Реализованная функциональность</h4>
-<ul>
-    <li>1.</li>
-</ul>
-
 <h4>Основной стек технологий:</h4>
 <ul>
 	<li>HTML, CSS, JavaScript.</li>
 	<li>PHP 8, PostgreSQL.</li>
 	<li>Yii2.</li>
-  	<li>SASS, Parcel, jQuery, Bootstrap, SCSS, BEM.</li>
+  	<li>React, SASS, Parcel, jQuery, Bootstrap, SCSS, BEM.</li>
 	<li>Docker, Docker-Compose, Git.</li>
 	<li>Github.</li>
  </ul>
