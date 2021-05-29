@@ -59,7 +59,7 @@ class UserTimetableController extends Controller
 
     public function actionList()
     {
-        $list = UserTimetableSearch::find()->asArray()->all();
+        $list = UserTimetableSearch::find()->joinWith(['item'])->asArray()->all();
         $list['length'] = count($list);
         return $list;
     }
