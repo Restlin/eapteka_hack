@@ -7,19 +7,15 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\UserTimetableSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'User Timetables';
+$this->title = 'Расписание';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-timetable-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create User Timetable', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
