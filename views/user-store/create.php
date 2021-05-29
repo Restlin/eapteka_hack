@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $items array */
 
 $this->title = 'Добавить лекарство';
-$this->params['breadcrumbs'][] = ['label' => '', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Мои лекарства', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-store-create">
