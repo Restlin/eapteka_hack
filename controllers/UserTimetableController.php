@@ -67,7 +67,7 @@ class UserTimetableController extends Controller
     public function actionComplete($id)
     {
         if (mb_strlen($id) <= 0) {
-            throw new BadRequestHttpException('Укажите ID');
+            throw new BadRequestHttpException('Отсутствуют обязательные параметры: id');
         }
         $model = $this->findModel($id);
         $model->complete = true;
