@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->dropDownList($users) ?>
-
     <?= $form->field($model, 'item_id')->dropDownList($items) ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>

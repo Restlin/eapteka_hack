@@ -42,6 +42,7 @@ class UserStoreController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserStoreSearch();
+        $searchModel->user_id = \Yii::$app->user->id;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -73,10 +74,10 @@ class UserStoreController extends Controller
     public function actionCreate()
     {
         $model = new UserStore();
+        $model->user_id = \Yii::$app->user->id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                //return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
