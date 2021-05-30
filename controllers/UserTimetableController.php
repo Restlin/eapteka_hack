@@ -100,8 +100,9 @@ class UserTimetableController extends Controller
     {
         $model = $this->findModel($id);
         $model->complete = true;
-        $model->item->amount--;
-        return $model->save(true, ['complete']) && $model->item->save(true, ['amount']);
+        $userStore = \app\models\UserStore::findOne(['target_id' => $model->user_id, 'item_id' => $model->item_id]);
+        $userStore->amount--;
+        return $model->save(true, ['complete']) && $userStore->save(true, ['amount']);
     }
 
     public function actionSkip(int $id)

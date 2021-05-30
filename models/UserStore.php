@@ -117,16 +117,18 @@ class UserStore extends \yii\db\ActiveRecord
     }
 
     public function afterSave($insert, $changedAttributes) {
-        $now = new \DateTime();
-        $times = $this->item->getTimes();
-        $content = $this->item->getModeContent();
-        for($day = 0; $day< 3; $day++) { //@todo заменить на курс приема из справочника. Константа для прототипа
-            $date = $now->format('d.m.Y');
-            foreach($times as $time) {
-                $this->createTimetable($date.' '.$time, $content);
+        if($insert) {
+            $now = new \DateTime();
+            $times = $this->item->getTimes();
+            $content = $this->item->getModeContent();
+            for($day = 0; $day< 3; $day++) { //@todo заменить на курс приема из справочника. Константа для прототипа
+                $date = $now->format('d.m.Y');
+                foreach($times as $time) {
+                    $this->createTimetable($date.' '.$time, $content);
+                }
+                $now->modify(" +1 days");
             }
-            $now->modify(" +1 days");
-        }
+        }        
         if(!$insert && $this->amount < 3 && $this->regular) { //@todo хардкод по прототипу
             $this->createTimetableAboutProduct();
         }
