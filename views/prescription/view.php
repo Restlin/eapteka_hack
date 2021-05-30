@@ -15,7 +15,7 @@ use yii\widgets\DetailView;
     foreach($model->items as $item) {
         $name = Html::tag('b', "{$item->substance->name} {$item->dose}мг.");
         $cart = Html::tag('button', Html::tag('span', '', ['class' => 'glyphicon glyphicon-shopping-cart']), ['class' => 'btn btn-icon']);
-        $link = Html::a(Html::tag('span', $name . $cart, ['class' => 'chip']), ['user-store/create', 'substance_id' => $item->substance_id]);
+        $link = Html::a(Html::tag('span', $name . $cart, ['class' => 'chip']), ['user-store/create', 'substance_id' => $item->substance_id, 'target_id' => $model->patient_id]);
         $substances[] = $link;
     }
     ?>

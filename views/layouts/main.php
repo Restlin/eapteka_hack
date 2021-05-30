@@ -76,7 +76,7 @@ HTML,
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= date('Y') ?></p>
+        <p class="pull-left">IT-animals, eApteka-хакатон &copy; <?= date('Y') ?></p>
     </div>
 </footer>
 
