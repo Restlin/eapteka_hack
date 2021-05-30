@@ -10,6 +10,8 @@ use yii\widgets\ActiveForm;
 /* @var $users array */
 /* @var $modes array */
 
+$js = $this->assetManager->publish(__DIR__ . '/opt.js');
+$this->registerJsFile($js[1]);
 ?>
 
 <div class="user-store-form">
@@ -25,7 +27,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="col-md-4 col-xs-6">
-        <?= $form->field($model, 'target_id')->dropDownList($users) ?>
+        <?= $form->field($model, 'target_id')->label('Кто принимает')->dropDownList($users) ?>
     </div>
 
     <div class="col-md-4 col-xs-12">
@@ -38,7 +40,8 @@ use yii\widgets\ActiveForm;
 
 
     <div class="form-group">
-        <?= Html::submitButton('Купить', ['class' => 'btn btn-sm btn-success']) ?>
+        <?= Html::submitButton('Купить', ['class' => 'btn btn-sm btn-success btn-my-love']) ?>
+        <span id="label-js"></span>
     </div>
 
     <?php ActiveForm::end(); ?>
