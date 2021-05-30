@@ -57,7 +57,7 @@ class UserStoreController extends Controller
         /*@var $user \app\models\User */        
         $users = $user->getFamilyUsers();
         
-        $searchModel->user_id = array_keys($users);
+        $searchModel->user_id = $user->id;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
