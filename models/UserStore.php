@@ -107,6 +107,11 @@ class UserStore extends \yii\db\ActiveRecord
                     }
                 }
             }
+            foreach($this->target->items as $item) {
+                if($item->substance->getSubstanceEffects()->andWhere(['positive' => false, 'substance_id2' => $this->item->substance_id])->one()) {
+                    $this->addError('item_id', 'Это лекарство не сочетается с принимаемым: '.$item->name.'!');
+                }
+            }
         }
         return parent::beforeValidate();
     }

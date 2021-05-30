@@ -24,6 +24,7 @@ use Yii;
  * @property UserFamily[] $userFamilies0
  * @property UserStore[] $userStores
  * @property UserStore[] $userStores0
+ * @property Item[] $items что сейчас принимает
  * @property UserTimetable[] $userTimetables
  */
 class User extends \yii\db\ActiveRecord
@@ -166,6 +167,16 @@ class User extends \yii\db\ActiveRecord
     public function getUserStores0()
     {
         return $this->hasMany(UserStore::class, ['target_id' => 'id']);
+    }
+    
+    /**
+     * Gets query for [[UserStores0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(Item::class, ['id' => 'item_id'])->via('userStores0');
     }
 
     /**
