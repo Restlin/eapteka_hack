@@ -10,7 +10,9 @@ const init = function () {
     select.querySelector('option').onclick = function (event) {
         label.innerText = '👍🏻 Оптимальная цена'
         label.classList.add('myLabelLove');
-        myDR.querySelector('.help-block').classList.add('myBad')
+
+        if(myDR.querySelector('.help-block').innerHTML === '') return;
+            myDR.querySelector('.help-block').classList.add('myBad')
     }
     select.querySelectorAll('option').forEach((item, i) => {
         if (i !== 0) {
