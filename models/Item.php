@@ -162,7 +162,7 @@ class Item extends \yii\db\ActiveRecord
         if($substance_id) {
             $query->andWhere(['substance_id' => $substance_id]);
         }
-        $models = $query->all();
+        $models = $query->orderBy(['price' => SORT_ASC])->all();
         foreach($models as $model) {
             $list[$model->id] = $model->price.' руб. - '.$model->name;
         }
