@@ -30,14 +30,14 @@ class m210527_102248_create_substance_effect_table extends Migration
             'substance_id1' => 1,
             'substance_id2' => 4,
             'positive' => false,
-            'Конфликтуют друг с другом'
+            'content' => 'Конфликтуют друг с другом'
         ]);
         
         $this->insert('{{%substance_effect}}', [
             'substance_id1' => 4,
             'substance_id2' => 1,
             'positive' => false,
-            'Конфликтуют друг с другом'
+            'content' =>  'Конфликтуют друг с другом'
         ]);
     }
         
