@@ -54,7 +54,7 @@ HTML,
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Выход (' . Yii::$app->user->identity->getUser()->email . ')',
+                    'Выход',
                     ['class' => 'btn btn-sm btn-link logout']
                 )
                 . Html::endForm()

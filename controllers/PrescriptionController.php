@@ -38,6 +38,12 @@ class PrescriptionController extends Controller
     public function actionIndex()
     {
         $searchModel = new PrescriptionSearch();
+        
+        $user = \Yii::$app->user->identity->getUser();        
+        /*@var $user \app\models\User */        
+        $users = $user->getFamilyUsers();               
+        
+        $searchModel->patient_id = array_keys($users);
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

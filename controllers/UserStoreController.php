@@ -42,14 +42,19 @@ class UserStoreController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserStoreSearch();
-        $searchModel->user_id = \Yii::$app->user->id;
+        
+        $user = \Yii::$app->user->identity->getUser();        
+        /*@var $user \app\models\User */        
+        $users = $user->getFamilyUsers();
+        
+        $searchModel->user_id = array_keys($users);
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'items' => Item::getList(),
-            'users' => User::getList(),
+            'users' => $users,
             'modes' => UserStore::getStoreModeList(),
         ]);
     }
@@ -76,9 +81,13 @@ class UserStoreController extends Controller
      */
     public function actionCreate($substance_id = null, $target_id = null)
     {
+        $user = \Yii::$app->user->identity->getUser();        
+        /*@var $user \app\models\User */        
+        $users = $user->getFamilyUsers();
+        
         $model = new UserStore();
-        $model->user_id = \Yii::$app->user->id;
-        $model->target_id = $target_id;
+        $model->user_id = $user->id;
+        $model->target_id = key_exists($target_id, $users) ? $target_id : null;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -91,7 +100,7 @@ class UserStoreController extends Controller
         return $this->render('create', [
             'model' => $model,
             'items' => Item::getList($substance_id),
-            'users' => User::getList(),
+            'users' => $users,
             'modes' => UserStore::getStoreModeList(),
         ]);
     }
@@ -105,6 +114,10 @@ class UserStoreController extends Controller
      */
     public function actionUpdate($id)
     {
+        $user = \Yii::$app->user->identity->getUser();        
+        /*@var $user \app\models\User */        
+        $users = $user->getFamilyUsers();
+        
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -114,7 +127,7 @@ class UserStoreController extends Controller
         return $this->render('update', [
             'model' => $model,
             'items' => Item::getList(),
-            'users' => User::getList(),
+            'users' => $users,
             'modes' => UserStore::getStoreModeList(),
         ]);
     }

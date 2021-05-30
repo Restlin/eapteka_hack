@@ -99,7 +99,7 @@ class UserStore extends \yii\db\ActiveRecord
     }
 
     public function beforeValidate() {
-        if($this->target) {
+        if($this->target && $this->item) {
             foreach($this->target->userDiagnoses as $userDiagnos) {
                 foreach($userDiagnos->diagnosis->diagnosisSubstances as $diagnosisSubstance) {
                     if($diagnosisSubstance->substance_id == $this->item->substance_id) {

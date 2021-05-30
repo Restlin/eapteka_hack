@@ -177,6 +177,16 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserTimetable::class, ['user_id' => 'id']);
     }
+    
+    
+    //@todo после стадии прототипа перенести в сервис или доменную сущность
+    public function getFamilyUsers(): array {
+        $list = [$this->id => $this->fio];
+        foreach($this->userFamilies as $family) {
+            $list[$family->user_id2] = $family->user2->fio;
+        }
+        return $list;
+    }
 
     public static function getList(): array {
         $list = [];
