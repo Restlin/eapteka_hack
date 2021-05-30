@@ -73,11 +73,14 @@ HTML,
         <?= $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">IT-animals, eApteka-хакатон &copy; <?= date('Y') ?></p>
+<footer class="myFooter">
+    <div class="logo">
+        <img src="images/logo.svg" alt="">
     </div>
+    <div class="container">
+        <p class="pull-left">eApteka-хакатон © <?= date('Y') ?></p>
+    </div>
+
 </footer>
 
 <?php $this->endBody() ?>
