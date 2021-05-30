@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $model->item->content ?>
                 </p>
             </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col-md-5">
                 <h3>Правила приема</h3>
@@ -73,6 +73,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="alert alert-info alert-center" role="alert">
                     <h4><span class="glyphicon glyphicon-asterisk"></span> &nbsp;<b><?= $model->item->temp_min ?>℃</b> - Минимальная температура хранения</h4>
                 </div>
+            </div>
+        </div>
+        <?php 
+            $substance = $model->item->substance;
+            $conflicts = [];
+            foreach($model->item->substance->substanceEffects as $substanceEffect) {
+                if(!$substanceEffect->positive) {
+                    $conflicts[] = $substanceEffect->substanceId2->name;
+                }
+            } 
+        ?>
+        <div class="row">
+            <div class="col-md-5">
+                <h3>Действущее вещество</h3>
+                <ul>
+                    <li><?= $model->item->substance->name ?></li>
+                    <li>Не сочетается с: <?= $conflicts ? implode(', ', $conflicts) : 'нет' ?></li>
+                </ul>
             </div>
         </div>
     </div>
