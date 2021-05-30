@@ -58,7 +58,6 @@ class UserStoreController extends Controller
         $users = $user->getFamilyUsers();
 
         $searchModel->user_id = $user->id;
-
         $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider->query->andFilterWhere(['mode' => 1]);
         $dataProvider2 = $searchModel->search($this->request->queryParams);
