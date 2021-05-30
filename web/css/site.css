@@ -96,9 +96,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
@@ -125,9 +125,6 @@ a.desc:after {
     margin-left: 15px;
 }
 /*test*/
-
-
-
 
 
 .button,
@@ -253,6 +250,7 @@ a.desc:after {
         padding: 8.5px 14px 9px;
     }
 }
+
 .button.btn-sm,
 .btn.btn-sm,
 .button.btn-sm-l,
@@ -275,6 +273,7 @@ a.desc:after {
         padding: 11.5px 12px 12px;
     }
 }
+
 .button.btn-sm,
 .btn.btn-sm {
     padding: 4px 19px;
@@ -291,6 +290,7 @@ a.desc:after {
         padding: 4px 19px;
     }
 }
+
 .button.btn-xsm,
 .btn.btn-xsm {
     padding: 2.5px 8px 3px;
@@ -321,6 +321,7 @@ a.desc:after {
         padding: 9.5px 14px 10px;
     }
 }
+
 .button.btn-square,
 .btn.btn-square {
     border-radius: 11px;
@@ -990,6 +991,7 @@ a.desc:after {
     -moz-appearance: none;
     appearance: none;
 }
+
 .custom-select:hover {
     border-color: #8168f0;
     outline: 0;
@@ -1053,11 +1055,13 @@ a.desc:after {
     height: 50px;
     padding: 5px !important;
 }
+
 .logo__link {
     width: 100%;
     height: 100%;
     display: block;
 }
+
 .logo img {
     width: 100%;
     height: 100%;
@@ -1101,21 +1105,27 @@ a.desc:after {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+
 .cardContent-1 {
     -webkit-line-clamp: 1;
 }
+
 .cardContent-2 {
     -webkit-line-clamp: 2;
 }
+
 .cardContent-3 {
     -webkit-line-clamp: 3;
 }
+
 .cardContent-4 {
     -webkit-line-clamp: 4;
 }
+
 .cardContent-5 {
     -webkit-line-clamp: 5;
 }
+
 .cardContent-6 {
     -webkit-line-clamp: 6;
 }
@@ -1124,6 +1134,7 @@ a.desc:after {
     width: 250px;
     object-fit: cover;
 }
+
 @media (max-width: 550px) {
     .imageWrapper img {
         width: 100%;
@@ -1137,27 +1148,32 @@ a.desc:after {
     flex-wrap: wrap;
     row-gap: 10px;
 }
+
 .indTopLine__button-wrapper {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     flex-wrap: wrap;
 }
+
 .indTopLine__button-wrapper div {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
 }
+
 @media (max-width: 550px) {
     .indTopLine__button-wrapper {
         row-gap: 5px;
     }
+
     .indTopLine__button-wrapper div {
         display: flex;
         flex-direction: row;
         row-gap: 5px;
         column-gap: 10px;
     }
+
     .indTopLine__button-wrapper div .btn {
         width: 120px;
     }
@@ -1181,6 +1197,7 @@ a.desc:after {
     display: flex;
     align-items: center;
 }
+
 .alert-center h1,
 .alert-center h2,
 .alert-center h3,
@@ -1195,6 +1212,7 @@ a.desc:after {
     align-items: center;
     column-gap: 10px;
 }
+
 .rowCenter h1,
 .rowCenter h2,
 .rowCenter h3,
@@ -1240,6 +1258,7 @@ a.desc:after {
     border-radius: 5px;
     display: block;
 }
+
 .chip:hover {
     text-decoration: none;
 }
@@ -1251,6 +1270,7 @@ a.desc:after {
     row-gap: 5px;
     cursor: pointer;
 }
+
 .chipBox a:hover {
     text-decoration: none;
 }
