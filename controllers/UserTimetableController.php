@@ -83,6 +83,7 @@ class UserTimetableController extends Controller
             throw new BadRequestHttpException("Передан не верный формат даты!");
         }
         $list = UserTimetableSearch::find()
+            ->andWhere(['user_id' => \Yii::$app->user->id])
             ->joinWith(['item'])
             ->andWhere(['between', 'date', $datetime->format('d.m.Y 00:00:00'), $datetime->format('d.m.Y 23:59:59')])
             ->asArray()
