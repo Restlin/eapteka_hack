@@ -12,6 +12,7 @@ const init = function () {
         if (i !== 0) {
             item.onclick = function (event) {
                 label.innerText = ''
+                label.classList.remove('myLabelLove')
             }
         }
     })
