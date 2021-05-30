@@ -23,7 +23,7 @@ if ($stream) {
         <h3 class="cardContent cardContent-2"><?= $name ?></h3>
         <div class="row">
             <div class="col-md-12">
-                <h4>Осталось: <?= $model->item->amount ?></h4>
+                <h4>Осталось: <?= $model->amount ?></h4>
             </div>
         </div>
         <div class="row">
