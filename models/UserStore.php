@@ -93,8 +93,8 @@ class UserStore extends \yii\db\ActiveRecord
 
     public static function getStoreModeList(): array {
         return [
-            1 => 'В дорогу',
             2 => 'Домой',
+            1 => 'В дорогу',            
         ];
     }
 

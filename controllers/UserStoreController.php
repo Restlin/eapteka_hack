@@ -100,6 +100,7 @@ class UserStoreController extends Controller
         $users = $user->getFamilyUsers();
 
         $model = new UserStore();
+        $model->mode = 2;
         $model->user_id = $user->id;
         $model->target_id = key_exists($target_id, $users) ? $target_id : null;
 

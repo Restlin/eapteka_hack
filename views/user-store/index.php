@@ -29,14 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= \yii\bootstrap\Tabs::widget([
         'items' => [
             [
-                'label' => 'В дорогу',
-                'content' => ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemOptions' => ['class' => 'col-sm-6 col-md-4'],
-                    'itemView' => '_item',
-                ]),
-            ],
-            [
                 'label' => 'Домой',
                 'content' => ListView::widget([
                     'dataProvider' => $dataProvider2,
@@ -44,6 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'itemView' => '_item',
                 ]),
             ],
+            [
+                'label' => 'В дорогу',
+                'content' => ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'itemOptions' => ['class' => 'col-sm-6 col-md-4'],
+                    'itemView' => '_item',
+                ]),
+            ],            
         ],
     ]) ?>
 
