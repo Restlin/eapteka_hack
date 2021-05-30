@@ -25,14 +25,14 @@ class UserStoreController extends Controller
     {
         return array_merge(
             parent::behaviors(),
-            [                
+            [
                 'access' => [
                     'class' => AccessControl::class,
                     'rules' => [
                         [
                             'allow' => true,
-                            'roles' => ['@'],                            
-                        ],                        
+                            'roles' => ['@'],
+                        ],
                     ],
                 ],
                 'verbs' => [
@@ -52,17 +52,22 @@ class UserStoreController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserStoreSearch();
-        
-        $user = \Yii::$app->user->identity->getUser();        
-        /*@var $user \app\models\User */        
+
+        $user = \Yii::$app->user->identity->getUser();
+        /*@var $user \app\models\User */
         $users = $user->getFamilyUsers();
-        
-        $searchModel->user_id = array_keys($users);
+
+        $searchModel->user_id = $user->id;
+
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->query->andFilterWhere(['mode' => 1]);
+        $dataProvider2 = $searchModel->search($this->request->queryParams);
+        $dataProvider2->query->andFilterWhere(['mode' => 2]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'dataProvider2' => $dataProvider2,
             'items' => Item::getList(),
             'users' => $users,
             'modes' => UserStore::getStoreModeList(),
@@ -91,10 +96,10 @@ class UserStoreController extends Controller
      */
     public function actionCreate($substance_id = null, $target_id = null)
     {
-        $user = \Yii::$app->user->identity->getUser();        
-        /*@var $user \app\models\User */        
+        $user = \Yii::$app->user->identity->getUser();
+        /*@var $user \app\models\User */
         $users = $user->getFamilyUsers();
-        
+
         $model = new UserStore();
         $model->user_id = $user->id;
         $model->target_id = key_exists($target_id, $users) ? $target_id : null;
@@ -124,10 +129,10 @@ class UserStoreController extends Controller
      */
     public function actionUpdate($id)
     {
-        $user = \Yii::$app->user->identity->getUser();        
-        /*@var $user \app\models\User */        
+        $user = \Yii::$app->user->identity->getUser();
+        /*@var $user \app\models\User */
         $users = $user->getFamilyUsers();
-        
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

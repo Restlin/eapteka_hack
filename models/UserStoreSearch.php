@@ -17,7 +17,8 @@ class UserStoreSearch extends UserStore
     public function rules()
     {
         return [
-            [['id', 'user_id', 'item_id', 'amount', 'target_id', 'mode'], 'integer'],
+            [['id', 'item_id', 'amount', 'target_id', 'mode'], 'integer'],
+            [['user_id'], 'safe'],
             [['regular'], 'boolean'],
         ];
     }
