@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\UserTimetable;
 use app\models\UserTimetableSearch;
 use DateTimeImmutable;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
@@ -25,6 +26,15 @@ class UserTimetableController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],                            
+                        ],                        
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::class,
                     'actions' => [
@@ -42,6 +52,13 @@ class UserTimetableController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserTimetableSearch();
+        
+        $user = \Yii::$app->user->identity->getUser();        
+        /*@var $user \app\models\User */        
+        $users = $user->getFamilyUsers();
+        
+        $searchModel->user_id = array_keys($users);
+        
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
