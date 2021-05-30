@@ -5,7 +5,8 @@ let label = document.getElementById('label-js');
 const init = function () {
     if (!select) return;
     select.querySelector('option').onclick = function (event) {
-        label.innerText = 'Оптимальная цена'
+        label.innerText = '👍🏻 Оптимальная цена'
+        label.classList.add('myLabelLove');
     }
     select.querySelectorAll('option').forEach((item, i) => {
         if (i !== 0) {

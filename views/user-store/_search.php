@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="row">
-        <div class="col-md-3 col-xs-6">
+        <div class="col-md-3 col-sm-6">
             <?= $form->field($model, 'target_id')->dropDownList($users) ?>
         </div>
     </div>

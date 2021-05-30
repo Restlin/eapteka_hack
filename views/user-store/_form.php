@@ -22,15 +22,15 @@ $this->registerJsFile($js[1]);
         <?= $form->field($model, 'item_id')->dropDownList($items) ?>
     </div>
 
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-4 col-sm-6">
         <?= $form->field($model, 'amount')->textInput() ?>
     </div>
 
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-4 col-sm-6">
         <?= $form->field($model, 'target_id')->label('Кто принимает')->dropDownList($users) ?>
     </div>
 
-    <div class="col-md-4 col-xs-12">
+    <div class="col-md-4 col-sm-12">
         <?= $form->field($model, 'mode')->dropDownList($modes) ?>
     </div>
 
