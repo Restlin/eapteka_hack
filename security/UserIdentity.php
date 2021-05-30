@@ -109,7 +109,7 @@ class UserIdentity implements IdentityInterface
      */
     public function validatePassword(string $password): bool
     {
-        return true; //на стадии прототипа
+        return $password == '123456'; //@todo убрать после демо
         return Yii::$app->security->validatePassword($password, $this->user->password_hash);
     }
 
