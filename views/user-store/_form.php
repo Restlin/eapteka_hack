@@ -18,7 +18,7 @@ $this->registerJsFile($js[1]);
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="col-md-12">
+    <div class="col-md-12 myDropDown">
         <?= $form->field($model, 'item_id')->dropDownList($items) ?>
     </div>
 
